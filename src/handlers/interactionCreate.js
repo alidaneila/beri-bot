@@ -31,6 +31,7 @@ const {
   buildGoldExcludeSelect,
   buildAccountingSelect,
 } = require('../ui/salaryComponents');
+const leaderboardService = require('../services/leaderboardService');
 const { resolveDisplayNames } = require('../utils/members');
 const partyBoardService = require('../services/partyBoardService');
 

@@ -42,4 +42,11 @@ if (guildSettingsCols.length && !guildSettingsCols.includes('party_channel_id'))
   console.log('[db] Migrasi selesai: kolom party board ditambah ke guild_settings.');
 }
 
+if (guildSettingsCols.length && !guildSettingsCols.includes('leaderboard_channel_id')) {
+  db.exec(`ALTER TABLE guild_settings ADD COLUMN leaderboard_channel_id TEXT`);
+  db.exec(`ALTER TABLE guild_settings ADD COLUMN leaderboard_alltime_message_id TEXT`);
+  db.exec(`ALTER TABLE guild_settings ADD COLUMN leaderboard_weekly_message_id TEXT`);
+  console.log('[db] Migrasi selesai: kolom leaderboard ditambah ke guild_settings.');
+}
+
 module.exports = db;

@@ -62,6 +62,13 @@ module.exports = {
             .addChannelTypes(ChannelType.GuildText)
             .setRequired(false)
         )
+        .addChannelOption((opt) =>
+          opt
+            .setName('leaderboard_channel')
+            .setDescription('Channel buat 2 pesan leaderboard (top richest), opsional')
+            .addChannelTypes(ChannelType.GuildText)
+            .setRequired(false)
+        )
         .addBooleanOption((opt) =>
           opt
             .setName('autonick')
@@ -73,91 +80,131 @@ module.exports = {
     ),
 
   async execute(interaction) {
-    const sub = interaction.options.getSubcommand();
+  const sub = interaction.options.getSubcommand();
 
-    if (sub === 'bot') {
-      if (!interaction.member.permissions.has(PermissionFlagsBits.ManageGuild)) {
-        await interaction.reply({
-          content: '⛔ Cuma admin server yang bisa atur ini.',
-          ephemeral: true,
-        });
-        return;
-      }
-
-      const patch = {};
-
-      const salaryChannel =
-        interaction.options.getChannel('salary_channel');
-
-      if (salaryChannel) {
-        patch.salary_channel_id = salaryChannel.id;
-      }
-
-      const visibility =
-        interaction.options.getString('thread_visibility');
-
-      if (visibility) {
-        patch.thread_visibility = visibility;
-      }
-
-      const boardChannel =
-        interaction.options.getChannel('unsold_board_channel');
-
-      if (boardChannel) {
-        patch.unsold_board_channel_id = boardChannel.id;
-        patch.unsold_board_message_id = null;
-        // channel ganti -> pesan lama gak relevan lagi
-      }
-
-      const disableBoard =
-        interaction.options.getBoolean('disable_board');
-
-      if (disableBoard) {
-        patch.unsold_board_channel_id = null;
-        patch.unsold_board_message_id = null;
-      }
-
-      const autonick =
-        interaction.options.getBoolean('autonick');
-
-      if (autonick !== null) {
-        patch.autonick = autonick ? 1 : 0;
-      }
-
-      const language = interaction.options.getString('language');
-      if (language) patch.language = language;
-
-      const updated =
-        guildSettingsService.updateSettings(
-          interaction.guildId,
-          patch
-        );
-
-      const lines = [
-        `📍 Salary channel: ${
-          updated.salary_channel_id
-            ? `<#${updated.salary_channel_id}>`
-            : '*(belum diatur)*'
-        }`,
-        `👁️ Thread visibility: **${updated.thread_visibility}**`,
-        `📦 Unsold board: ${
-          updated.unsold_board_channel_id
-            ? `<#${updated.unsold_board_channel_id}>`
-            : '*(nonaktif)*'
-        }`,
-        `🏷️ Auto-nick: **${updated.autonick ? 'ON' : 'OFF'}**`,
-        `🌐 Language: **${updated.language}**`,
-      ];
-
+  if (sub === 'bot') {
+    if (!interaction.member.permissions.has(PermissionFlagsBits.ManageGuild)) {
       await interaction.reply({
-        content: `✅ Pengaturan bot diperbarui:\n${lines.join('\n')}`,
+        content: '⛔ Cuma admin server yang bisa atur ini.',
         ephemeral: true,
       });
-
-      const partyBoardChannel = interaction.options.getChannel('party_channel');
-      if (partyBoardChannel) patch.party_channel_id = partyBoardChannel.id;
-
       return;
     }
-  },
-};
+
+    const patch = {};
+
+    // Language
+    const language = interaction.options.getString('language');
+    if (language) {
+      patch.language = language;
+    }
+
+    // Salary channel
+    const salaryChannel =
+      interaction.options.getChannel('salary_channel');
+
+    if (salaryChannel) {
+      patch.salary_channel_id = salaryChannel.id;
+    }
+
+    // Thread visibility
+    const visibility =
+      interaction.options.getString('thread_visibility');
+
+    if (visibility) {
+      patch.thread_visibility = visibility;
+    }
+
+    // Unsold board
+    const boardChannel =
+      interaction.options.getChannel('unsold_board_channel');
+
+    if (boardChannel) {
+      patch.unsold_board_channel_id = boardChannel.id;
+      patch.unsold_board_message_id = null;
+      // channel ganti -> pesan lama gak relevan lagi
+    }
+
+    // Disable unsold board
+    const disableBoard =
+      interaction.options.getBoolean('disable_board');
+
+    if (disableBoard) {
+      patch.unsold_board_channel_id = null;
+      patch.unsold_board_message_id = null;
+    }
+
+    // Party board
+    const partyBoardChannel =
+      interaction.options.getChannel('party_channel');
+
+    if (partyBoardChannel) {
+      patch.party_channel_id = partyBoardChannel.id;
+    }
+
+    // Leaderboard
+    const leaderboardChannel =
+      interaction.options.getChannel('leaderboard_channel');
+
+    if (leaderboardChannel) {
+      patch.leaderboard_channel_id = leaderboardChannel.id;
+      patch.leaderboard_alltime_message_id = null;
+      patch.leaderboard_weekly_message_id = null;
+      // channel ganti -> pesan leaderboard lama gak relevan
+    }
+
+    // Auto nickname
+    const autonick =
+      interaction.options.getBoolean('autonick');
+
+    if (autonick !== null) {
+      patch.autonick = autonick ? 1 : 0;
+    }
+
+    // SIMPAN SEMUA SETTING SEKALIGUS
+    const updated =
+      guildSettingsService.updateSettings(
+        interaction.guildId,
+        patch
+      );
+
+    const lines = [
+      `📍 Salary channel: ${
+        updated.salary_channel_id
+          ? `<#${updated.salary_channel_id}>`
+          : '*(belum diatur)*'
+      }`,
+
+      `👁️ Thread visibility: **${updated.thread_visibility}**`,
+
+      `📦 Unsold board: ${
+        updated.unsold_board_channel_id
+          ? `<#${updated.unsold_board_channel_id}>`
+          : '*(nonaktif)*'
+      }`,
+
+      `🎉 Party channel: ${
+        updated.party_channel_id
+          ? `<#${updated.party_channel_id}>`
+          : '*(belum diatur)*'
+      }`,
+
+      `🏆 Leaderboard: ${
+        updated.leaderboard_channel_id
+          ? `<#${updated.leaderboard_channel_id}>`
+          : '*(belum diatur)*'
+      }`,
+
+      `🏷️ Auto-nick: **${updated.autonick ? 'ON' : 'OFF'}**`,
+
+      `🌐 Language: **${updated.language}**`,
+    ];
+
+    await interaction.reply({
+      content: `✅ Pengaturan bot diperbarui:\n${lines.join('\n')}`,
+      ephemeral: true,
+    });
+
+    return;
+  }
+},

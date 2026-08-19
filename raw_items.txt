@@ -1,0 +1,216 @@
+GDN CLASIC
+-  GDN Unique Accessory (Earrings@STR AGI) X 20
+-  GDN Unique Accessory (Earrings@INT AGI) X 20
+-  GDN Unique Accessory (Earrings@INT VIT) X 20
+-  GDN Unique Accessory (Neckle@STR AGI) X 20
+-  GDN Unique Accessory (Neckle@INT AGI) X 20
+-  GDN Unique Accessory (Neckle@INT VIT) X 20
+-  GDN Unique Accessory (Ring@ATP) X 20
+-  GDN Unique Accessory (Ring@MTP) X 20
+-  GDN Unique Accessory (Ring@MIX) X 20
+----------------------------------------------------
+-  GDN Armor (Warrior@Head) x 1
+-  GDN Armor (Warrior@Shirt) x 1
+-  GDN Armor (Warrior@Pants) x 1
+-  GDN Armor (Warrior@Gloves) x 1
+-  GDN Armor (Warrior@Boots) x 1
+-  GDN Weapon (Warrior@Axe) x 3
+-  GDN Weapon (Warrior@Hammer) x 3
+-  GDN Weapon (Warrior@Sword) x 3
+-  GDN Weapon (Warrior@Gauntlet) x 3
+----------------------------------------------------
+-  GDN Armor (Cleric@Galero) x 1
+-  GDN Armor (Cleric@Armor) x 1
+-  GDN Armor (Cleric@Trousers) x 1
+-  GDN Armor (Cleric@Cuff) x 1
+-  GDN Armor (Cleric@Shoes) x 1
+-  GDN Weapon (Cleric@Flail) x 3
+-  GDN Weapon (Cleric@Mace) x 3
+-  GDN Weapon (Cleric@Wand) x 3
+-  GDN Weapon (Cleric@Shield) x 3
+----------------------------------------------------
+-  GDN Armor (Arcer@Headband) x 1
+-  GDN Armor (Arcer@OnePiece) x 1
+-  GDN Armor (Arcer@Leggings) x 1
+-  GDN Armor (Arcer@Mittens) x 1
+-  GDN Armor (Arcer@Booties) x 1
+-  GDN Weapon (Arcer@Shortbow) x 3
+-  GDN Weapon (Arcer@Longbow) x 3
+-  GDN Weapon (Arcer@Crossbow) x 3
+-  GDN Weapon (Arcer@Quiver) x 3
+----------------------------------------------------
+-  GDN Armor (Sorceress@Tiara) x 1
+-  GDN Armor (Sorceress@Robe) x 1
+-  GDN Armor (Sorceress@Tights) x 1
+-  GDN Armor (Sorceress@Muffs) x 1
+-  GDN Armor (Sorceress@Heels) x 1
+-  GDN Weapon (Sorceress@Spellbook) x 3
+-  GDN Weapon (Sorceress@CrystalBall) x 3
+-  GDN Weapon (Sorceress@VoodooDoll) x 3
+-  GDN Weapon (Sorceress@Staff) x 3
+----------------------------------------------------
+-  GDN Armor (Academic@Beret) x 1
+-  GDN Armor (Academic@Tunic) x 1
+-  GDN Armor (Academic@Slacks) x 1
+-  GDN Armor (Academic@Cloack) x 1
+-  GDN Armor (Academic@Shoes) x 1
+-  GDN Weapon (Academic@Cannon) x 3
+-  GDN Weapon (Academic@Kabala) x 3
+-  GDN Weapon (Academic@Loop) x 3
+----------------------------------------------------
+-  GDN Armor (Kali@Orni) x 1
+-  GDN Armor (Kali@Chori) x 1
+-  GDN Armor (Kali@Salwar) x 1
+-  GDN Armor (Kali@Rakki) x 1
+-  GDN Armor (Kali@Jutti) x 1
+-  GDN Weapon (Kali@Fan) x 3
+-  GDN Weapon (Kali@Chakram) x 3
+-  GDN Weapon (Kali@Charm) x 3
+----------------------------------------------------
+-  GDN Armor (Assassin@Mask) x 1
+-  GDN Armor (Assassin@Vest) x 1
+-  GDN Armor (Assassin@Greave) x 1
+-  GDN Armor (Assassin@Grip) x 1
+-  GDN Armor (Assassin@Walker) x 1
+-  GDN Weapon (Assassin@Scimitar) x 3
+-  GDN Weapon (Assassin@Dagger) x 3
+-  GDN Weapon (Assassin@Crook) x 3
+----------------------------------------------------
+-  GDN Fragment x 1
+-  GDN Legend Thron Destroy x 8
+-  GDN Legend Forest Guardian x 8
+----------------------------------------------------
+
+
+
+
+GDN HC
+
+-  GDN Legend Accessory (Earrings@STR AGI) X 34
+-  GDN Legend Accessory (Earrings@INT AGI) X 34
+-  GDN Legend Accessory (Earrings@INT VIT) X 34
+-  GDN Legend Accessory (Neckle@STR AGI) X 34
+-  GDN Legend Accessory (Neckle@INT AGI) X 34
+-  GDN Legend Accessory (Neckle@INT VIT) X 34
+-  GDN Legend Accessory (Ring@ATP) X 34
+-  GDN Legend Accessory (Ring@MTP) X 34
+-  GDN Legend Accessory (Ring@MIX) X 34
+----------------------------------------------------
+-  GDN Fragment x 1
+-  GDN Legend Thorns Destroy x 8
+-  GDN Legend Forest Guardian x 8
+----------------------------------------------------
+
+
+
+
+DDN CLASIC
+
+-  DDN Unique Accessory (Earrings@STR AGI) X 22
+-  DDN Unique Accessory (Earrings@INT AGI) X 22
+-  DDN Unique Accessory (Earrings@INT VIT) X 22
+-  DDN Unique Accessory (Neckle@STR AGI) X 22
+-  DDN Unique Accessory (Neckle@INT AGI) X 22
+-  DDN Unique Accessory (Neckle@INT VIT) X 22
+-  DDN Unique Accessory (Ring@ATP) X 22
+-  DDN Unique Accessory (Ring@MTP) X 22
+-  DDN Unique Accessory (Ring@MIX) X 22
+----------------------------------------------------
+-  DDN Armor (Warrior@Head) x 2
+-  DDN Armor (Warrior@Shirt) x 2
+-  DDN Armor (Warrior@Pants) x 2
+-  DDN Armor (Warrior@Gloves) x 2
+-  DDN Armor (Warrior@Boots) x 2
+-  DDN Weapon (Warrior@Axe) x 4
+-  DDN Weapon (Warrior@Hammer) x 4
+-  DDN Weapon (Warrior@Sword) x 4
+-  DDN Weapon (Warrior@Gauntlet) x 4
+----------------------------------------------------
+-  DDN Armor (Cleric@Galero) x 2
+-  DDN Armor (Cleric@Armor) x 2
+-  DDN Armor (Cleric@Trousers) x 2
+-  DDN Armor (Cleric@Cuff) x 2
+-  DDN Armor (Cleric@Shoes) x 2
+-  DDN Weapon (Cleric@Flail) x 4
+-  DDN Weapon (Cleric@Mace) x 4
+-  DDN Weapon (Cleric@Wand) x 4
+-  DDN Weapon (Cleric@Shield) x 4
+----------------------------------------------------
+-  DDN Armor (Arcer@Headband) x 2
+-  DDN Armor (Arcer@OnePiece) x 2
+-  DDN Armor (Arcer@Leggings) x 2
+-  DDN Armor (Arcer@Mittens) x 2
+-  DDN Armor (Arcer@Booties) x 2
+-  DDN Weapon (Arcer@Shortbow) x 4
+-  DDN Weapon (Arcer@Longbow) x 4
+-  DDN Weapon (Arcer@Crossbow) x 4
+-  DDN Weapon (Arcer@Quiver) x 4
+----------------------------------------------------
+-  DDN Armor (Sorceress@Tiara) x 2
+-  DDN Armor (Sorceress@Robe) x 2
+-  DDN Armor (Sorceress@Tights) x 2
+-  DDN Armor (Sorceress@Muffs) x 2
+-  DDN Armor (Sorceress@Heels) x 2
+-  DDN Weapon (Sorceress@Spellbook) x 4
+-  DDN Weapon (Sorceress@CrystalBall) x 4
+-  DDN Weapon (Sorceress@VoodooDoll) x 4
+-  DDN Weapon (Sorceress@Staff) x 4
+----------------------------------------------------
+-  DDN Armor (Academic@Beret) x 2
+-  DDN Armor (Academic@Tunic) x 2
+-  DDN Armor (Academic@Slacks) x 2
+-  DDN Armor (Academic@Cloack) x 2
+-  DDN Armor (Academic@Shoes) x 2
+-  DDN Weapon (Academic@Cannon) x 4
+-  DDN Weapon (Academic@Kabala) x 4
+-  DDN Weapon (Academic@Loop) x 4
+----------------------------------------------------
+-  DDN Armor (Kali@Orni) x 2
+-  DDN Armor (Kali@Chori) x 2
+-  DDN Armor (Kali@Salwar) x 2
+-  DDN Armor (Kali@Rakki) x 2
+-  DDN Armor (Kali@Jutti) x 2
+-  DDN Weapon (Kali@Fan) x 4
+-  DDN Weapon (Kali@Chakram) x 4
+-  DDN Weapon (Kali@Charm) x 4
+----------------------------------------------------
+-  DDN Armor (Assassin@Mask) x 2
+-  DDN Armor (Assassin@Vest) x 2
+-  DDN Armor (Assassin@Greave) x 2
+-  DDN Armor (Assassin@Grip) x 2
+-  DDN Armor (Assassin@Walker) x 2
+-  DDN Weapon (Assassin@Scimitar) x 4
+-  DDN Weapon (Assassin@Dagger) x 4
+-  DDN Weapon (Assassin@Crook) x 4
+----------------------------------------------------
+-  DDN Fragment x 1
+-  DDN Smelted Rune x 4
+-  DDN Legend Strom Triangular x 8
+-  DDN Unique Strom Triangular x 4
+-  DDN Legend Hot Spring x 8
+-  DDN Unique Hot Spring x 4
+----------------------------------------------------
+
+
+
+
+DDN HC
+
+-  DDN Legend Accessory (Earrings@STR AGI) X 36
+-  DDN Legend Accessory (Earrings@INT AGI) X 36
+-  DDN Legend Accessory (Earrings@INT VIT) X 36
+-  DDN Legend Accessory (Neckle@STR AGI) X 36
+-  DDN Legend Accessory (Neckle@INT AGI) X 36
+-  DDN Legend Accessory (Neckle@INT VIT) X 36
+-  DDN Legend Accessory (Ring@ATP) X 36
+-  DDN Legend Accessory (Ring@MTP) X 36
+-  DDN Legend Accessory (Ring@MIX) X 36
+----------------------------------------------------
+-  DDN Fragment x 1
+-  DDN Research Records x 3
+-  DDN Smelted Rune x 4
+-  DDN Legend Strom Triangular x 8
+-  DDN Unique Strom Triangular x 4
+-  DDN Legend Hot Spring x 8
+-  DDN Unique Hot Spring x 4
+----------------------------------------------------

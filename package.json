@@ -1,0 +1,18 @@
+{
+  "name": "party-salary-bot",
+  "version": "1.0.0",
+  "description": "Discord bot untuk pembentukan party raid (GDN/DDN) dan pembagian gaji/loot otomatis.",
+  "main": "src/index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/index.js",
+    "deploy-commands": "node src/commands/deploy-commands.js",
+    "seed-items": "node src/database/seedItems.js",
+    "parse-items": "node src/database/parseItemData.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.3.0",
+    "discord.js": "^14.16.3",
+    "dotenv": "^16.4.5"
+  }
+}

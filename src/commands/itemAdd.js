@@ -24,13 +24,6 @@ module.exports = {
         )
         .addStringOption((opt) =>
           opt
-            .setName('language')
-            .setDescription('Bahasa bot buat server ini')
-            .setRequired(false)
-            .addChoices({ name: 'Indonesia', value: 'id' }, { name: 'English', value: 'en' })
-        )
-        .addStringOption((opt) =>
-          opt
             .setName('item_name')
             .setDescription('Nama lengkap item')
             .setRequired(true)

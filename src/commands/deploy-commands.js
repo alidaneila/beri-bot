@@ -5,6 +5,7 @@ const party = require('./party');
 const itemAdd = require('./itemAdd');
 const lootAdd = require('./lootAdd');
 const approve = require('./approve');
+const setup = require('./setup');
 
 const commands = [party.data.toJSON(), itemAdd.data.toJSON(), lootAdd.data.toJSON(), approve.data.toJSON()];
 

@@ -119,7 +119,7 @@ CREATE TABLE IF NOT EXISTS guild_settings (
   created_at               TEXT DEFAULT (datetime('now')),
   updated_at               TEXT DEFAULT (datetime('now')),
   party_channel_id         TEXT,
-  party_board_messege_id   TEXT,
+  party_board_message_id   TEXT,
     leaderboard_channel_id         TEXT,   -- channel buat 2 pesan leaderboard (opsional)
   leaderboard_alltime_message_id   TEXT,
   leaderboard_weekly_message_id    TEXT

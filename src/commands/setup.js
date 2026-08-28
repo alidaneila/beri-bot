@@ -2,6 +2,7 @@ const {
   SlashCommandBuilder,
   ChannelType,
   PermissionFlagsBits,
+  MessageFlags,
 } = require('discord.js');
 
 const guildSettingsService = require('../services/guildSettingsService');
@@ -86,7 +87,7 @@ module.exports = {
     if (!interaction.member.permissions.has(PermissionFlagsBits.ManageGuild)) {
       await interaction.reply({
         content: '⛔ Cuma admin server yang bisa atur ini.',
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
       return;
     }
@@ -202,8 +203,9 @@ module.exports = {
 
     await interaction.reply({
       content: `✅ Pengaturan bot diperbarui:\n${lines.join('\n')}`,
-      ephemeral: true,
+      flags: MessageFlags.Ephemeral,
     });
      return;
+  }
   },
 };

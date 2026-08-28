@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, MessageFlags } = require('discord.js');
 const db = require('../database/db');
 const partyService = require('../services/partyService');
 const salaryService = require('../services/salaryService');
@@ -49,7 +49,7 @@ module.exports = {
     if (!runRow) {
       await interaction.reply({
         content: '⛔ Command ini cuma bisa dipakai di dalam thread salary.',
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
       return;
     }
@@ -59,7 +59,7 @@ module.exports = {
     if (!salaryService.isAuthorized(run, salaryThread, interaction.user.id)) {
       await interaction.reply({
         content: '⛔ Hanya host atau accounting yang bisa nambah loot.',
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
       return;
     }
@@ -67,7 +67,7 @@ module.exports = {
     if (salaryService.isMutationLocked(runRow.run_id)) {
       await interaction.reply({
         content: '🔒 Sudah ada yang dibayar / panel ditutup — tidak bisa nambah item lagi.',
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
       return;
     }
@@ -79,7 +79,7 @@ module.exports = {
 
     await interaction.reply({
       content: `✅ Ditambahin ke daftar loot — menunggu harga.`,
-      ephemeral: true,
+      flags: MessageFlags.Ephemeral,
     });
 
     const members = await resolveDisplayNames(interaction.guild, partyService.getActiveMembers(run.id));

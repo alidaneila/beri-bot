@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, MessageFlags } = require('discord.js');
 const partyService = require('../services/partyService');
 const { buildPartyEmbed } = require('../ui/partyEmbed');
 const { buildPartyRows } = require('../ui/partyComponents');
@@ -27,7 +27,7 @@ module.exports = {
     const components = buildPartyRows(run, requirements, members);
 
     // Acknowledge interaction-nya secara private dulu (wajib, biar gak "This interaction failed")
-    await interaction.reply({ content: '✅ Party berhasil dibuat.', ephemeral: true });
+    await interaction.reply({ content: '✅ Party berhasil dibuat.', flags: MessageFlags.Ephemeral });
 
     // Kirim panel + ping @here sebagai PESAN BIASA (bukan interaction reply),
     // biar gak ada label "... used /createparty" di atasnya.

@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, MessageFlags } = require('discord.js');
 const config = require('../config');
 const guildSettingsService = require('../services/guildSettingsService');
 
@@ -9,7 +9,7 @@ module.exports = {
 
   async execute(interaction) {
     if (!config.ownerUserId || interaction.user.id !== config.ownerUserId) {
-      await interaction.reply({ content: '⛔ Cuma owner bot yang bisa approve server.', ephemeral: true });
+      await interaction.reply({ content: '⛔ Cuma owner bot yang bisa approve server.', flags: MessageFlags.Ephemeral });
       return;
     }
 
@@ -17,7 +17,7 @@ module.exports = {
 
     await interaction.reply({
       content: `✅ Server **${interaction.guild?.name || interaction.guildId}** sudah diaktifin.admin server bisa jalanin \`/setup bot\` buat atur.`,
-      ephemeral: true,
+      flags: MessageFlags.Ephemeral,
     });
   },
 };

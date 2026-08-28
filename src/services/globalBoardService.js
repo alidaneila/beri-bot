@@ -2,7 +2,7 @@ const { EmbedBuilder } = require('discord.js');
 const db = require('../database/db');
 const guildSettingsService = require('./guildSettingsService');
 
-const MAX_ITEMS_SHOWN = 40;
+const MAX_ITEMS_PER_GROUP = 25;
 
 /**
  * Semua item yang statusnya masih 'pending' (belum laku) di SELURUH server
@@ -31,11 +31,18 @@ function toUnixSeconds(sqliteDatetime) {
   return Math.floor(new Date(iso).getTime() / 1000);
 }
 
+/** Semua nama item di catalog diawalin "GDN " atau "DDN ", jadi gak perlu kolom raid_type terpisah. */
+function detectRaidType(itemName) {
+  if (/^GDN\s/i.test(itemName)) return 'GDN';
+  if (/^DDN\s/i.test(itemName)) return 'DDN';
+  return 'Lainnya'; // gold drop / label custom yang gak diawalin GDN/DDN
+}
+
 async function buildBoardEmbed(client) {
   const items = getGlobalUnsoldItems();
 
   const embed = new EmbedBuilder()
-    .setTitle('📦 Item Belum Laku (Semua Server)')
+    .setTitle('📦 Item Belum Laku')
     .setColor(0xf1c40f)
     .setFooter({ text: 'Update otomatis tiap ada perubahan item di thread manapun' });
 
@@ -44,43 +51,70 @@ async function buildBoardEmbed(client) {
     return embed;
   }
 
-  const shown = items.slice(0, MAX_ITEMS_SHOWN);
-  const lines = [];
-  for (const it of shown) {
+  // Cache nama guild biar gak fetch berulang buat item dari server yang sama
+  const guildNameCache = new Map();
+  async function resolveGuildName(guildId) {
+    if (guildNameCache.has(guildId)) return guildNameCache.get(guildId);
+    let name = client.guilds.cache.get(guildId)?.name;
+    if (!name) {
+      try { name = (await client.guilds.fetch(guildId)).name; } catch { name = 'Server'; }
+    }
+    guildNameCache.set(guildId, name);
+    return name;
+  }
+
+  function buildLine(it, guildName) {
     const name = it.item_name || it.fallback_label || 'Item';
     const qtyText = it.qty > 1 ? ` x${it.qty}` : '';
     const ts = toUnixSeconds(it.added_at);
-
-    let guildName = client.guilds.cache.get(it.guild_id)?.name;
-    if (!guildName) {
-      try { guildName = (await client.guilds.fetch(it.guild_id)).name; } catch { guildName = 'Server'; }
-    }
-
-    lines.push(`• **${name}**${qtyText} (${guildName}) — 🧮 <@${it.responsible_id}> — <t:${ts}:R>`);
+    return `${name}${qtyText} | <@${it.responsible_id}> | ${guildName} | <t:${ts}:R>`;
   }
 
-  embed.setDescription(lines.join('\n'));
-  if (items.length > MAX_ITEMS_SHOWN) {
-    embed.addFields({ name: '\u200b', value: `*+${items.length - MAX_ITEMS_SHOWN} item lainnya, gak muat ditampilin semua.*` });
+  // Pisah GDN / DDN / Lainnya berdasarkan awalan nama item
+  const groups = { GDN: [], DDN: [], Lainnya: [] };
+  for (const it of items) {
+    const name = it.item_name || it.fallback_label || '';
+    groups[detectRaidType(name)].push(it);
+  }
+
+  for (const key of ['GDN', 'DDN', 'Lainnya']) {
+    const groupItems = groups[key];
+    if (!groupItems.length) continue;
+
+    const shown = groupItems.slice(0, MAX_ITEMS_PER_GROUP);
+    const lines = [];
+    for (const it of shown) {
+      const guildName = await resolveGuildName(it.guild_id);
+      lines.push(buildLine(it, guildName));
+    }
+    if (groupItems.length > MAX_ITEMS_PER_GROUP) {
+      lines.push(`*+${groupItems.length - MAX_ITEMS_PER_GROUP} item lainnya*`);
+    }
+
+    embed.addFields({ name: `— ${key} —`, value: lines.join('\n').slice(0, 1024) });
   }
 
   return embed;
 }
 
 /**
- * Refresh board di SEMUA server yang punya unsold_board_channel_id aktif.
+ * Refresh board di SEMUA server (wajib, bukan opsional) — fallback ke salary_channel_id
+ * kalau unsold_board_channel_id belum di-set manual lewat /setup bot.
  * Dipanggil tiap ada mutasi loot_entry (nambah/hapus/isi harga item, cancel run).
  * Edit pesan lama kalau ada, kirim baru kalau belum/udah kehapus.
  */
 async function refreshGlobalBoard(client) {
-  const guilds = guildSettingsService.getGuildsWithBoard();
+  const guilds = guildSettingsService.getAllApprovedSettings();
   if (!guilds.length) return;
 
-  const embed = buildBoardEmbed(client);
+  const embed = await buildBoardEmbed(client);
 
   for (const g of guilds) {
+    const targetChannelId = g.unsold_board_channel_id || g.salary_channel_id;
+    if (!targetChannelId) continue; // belum ada channel apapun buat server ini, skip
+
     try {
-      const channel = await client.channels.fetch(g.unsold_board_channel_id);
+      const channel = await client.channels.fetch(targetChannelId);
       if (g.unsold_board_message_id) {
         try {
           const msg = await channel.messages.fetch(g.unsold_board_message_id);

@@ -2,6 +2,7 @@ const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('
 const db = require('../database/db');
 const partyService = require('./partyService');
 const guildSettingsService = require('./guildSettingsService');
+const config = require('../config');
 
 const MAX_PARTIES_SHOWN = 20; // dibatesin biar gak nabrak limit 25 tombol (5 baris x 5)
 const ALWAYS_HIDE_IF_ANY_FILLED = ['FU', 'MT', 'ARCHER', 'HEALER'];
@@ -74,14 +75,22 @@ async function buildBoardPayload(client) {
       try { guildName = (await client.guilds.fetch(run.guild_id)).name; } catch { guildName = 'Server'; }
     }
 
-    fields.push({ name: run.title, value: `Butuh: ${missingText}\n🔊 Voice Room: ${guildName}` });
+    const remainingSlots = config.partyMemberCap - members.length;
+    fields.push({
+      name: run.title,
+      value: [
+        `🔻 Kurang **${remainingSlots} orang**`,
+        `🔻 Job: ${missingText}`,
+        `🔻 Server: ${guildName}`,
+      ].join('\n'),
+    });
 
     const button = await buildJoinButton(client, run);
     if (button) buttons.push(button);
   }
 
   if (!fields.length) {
-    embed.setDescription('=====ALL DONE=====');
+    embed.setDescription('Nggak ada party yang butuh member saat ini. 🎉');
     return { embeds: [embed], components: [] };
   }
 
@@ -95,6 +104,12 @@ async function buildBoardPayload(client) {
   return { embeds: [embed], components: rows.slice(0, 5) };
 }
 
+/**
+ * Tiap refresh: hapus embed lama (kalau ada), kirim pesan ping @here dulu,
+ * BARU kirim embed baru di bawahnya. Ini SENGAJA gak "edit di tempat" lagi —
+ * karena Discord gak notify siapa pun kalau cuma edit pesan, jadi ping wajib
+ * dikirim sebagai pesan baru tiap kali biar beneran nge-ping.
+ */
 async function refreshPartyBoard(client) {
   const guilds = db.prepare(`SELECT * FROM guild_settings WHERE party_channel_id IS NOT NULL`).all();
   if (!guilds.length) return;
@@ -104,13 +119,21 @@ async function refreshPartyBoard(client) {
   for (const g of guilds) {
     try {
       const channel = await client.channels.fetch(g.party_channel_id);
+
+      // Hapus embed lama biar urutan selalu: ping di atas, embed baru di bawah
       if (g.party_board_message_id) {
         try {
-          const msg = await channel.messages.fetch(g.party_board_message_id);
-          await msg.edit(payload);
-          continue;
-        } catch (err) { /* pesan lama gone, kirim baru di bawah */ }
+          const oldMsg = await channel.messages.fetch(g.party_board_message_id);
+          await oldMsg.delete();
+        } catch (err) {
+          // udah kehapus / gak ketemu, lanjut aja
+        }
       }
+
+      await channel.send({
+        content: '@here ada party yang butuh member ⬇️',
+        allowedMentions: { parse: ['everyone'] },
+      });
       const msg = await channel.send(payload);
       guildSettingsService.updateSettings(g.guild_id, { party_board_message_id: msg.id });
     } catch (err) {
@@ -119,4 +142,57 @@ async function refreshPartyBoard(client) {
   }
 }
 
-module.exports = { refreshPartyBoard };
+/**
+ * Dipanggil dari Done/Cancel — BEDA sama refreshPartyBoard (yang dipicu Notify).
+ * Ini SENGAJA gak pernah ping ulang / kirim pesan baru. Cuma 2 kemungkinan:
+ * 1. Masih ada party lain yang butuh orang -> edit diem-diem embed yang udah ada.
+ * 2. Udah gak ada satupun yang butuh orang -> hapus ping+embed, gak ada pengganti.
+ */
+async function cleanupPartyBoard(client) {
+  const guilds = db.prepare(`SELECT * FROM guild_settings WHERE party_channel_id IS NOT NULL`).all();
+  if (!guilds.length) return;
+
+  const payload = await buildBoardPayload(client);
+  const stillNeeded = payload.embeds[0].data.fields?.length > 0;
+
+  for (const g of guilds) {
+    try {
+      const channel = await client.channels.fetch(g.party_channel_id);
+
+      if (!stillNeeded) {
+        // Udah gak ada party yang butuh orang sama sekali -> hapus semua, gak kirim apa-apa
+        if (g.party_board_message_id) {
+          try {
+            const oldEmbedMsg = await channel.messages.fetch(g.party_board_message_id);
+            await oldEmbedMsg.delete();
+          } catch (err) { /* udah kehapus / gak ketemu */ }
+        }
+        if (g.party_board_ping_message_id) {
+          try {
+            const oldPingMsg = await channel.messages.fetch(g.party_board_ping_message_id);
+            await oldPingMsg.delete();
+          } catch (err) { /* udah kehapus / gak ketemu */ }
+        }
+        guildSettingsService.updateSettings(g.guild_id, {
+          party_board_message_id: null,
+          party_board_ping_message_id: null,
+        });
+        continue;
+      }
+
+      // Masih ada party lain yang butuh orang -> edit diem-diem, GAK ping, GAK kirim baru
+      if (g.party_board_message_id) {
+        try {
+          const msg = await channel.messages.fetch(g.party_board_message_id);
+          await msg.edit(payload);
+        } catch (err) {
+          // pesan lama gone -> biarin aja, nunggu ada yang Notify buat munculin lagi
+        }
+      }
+    } catch (err) {
+      console.warn(`[partyBoardService] Gagal cleanup board guild ${g.guild_id}:`, err.message);
+    }
+  }
+}
+
+module.exports = { refreshPartyBoard, cleanupPartyBoard };

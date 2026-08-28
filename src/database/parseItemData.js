@@ -17,13 +17,13 @@ const lines = raw.split('\n').map((l) => l.trim());
 // Header section menandai raid_type + tier, contoh: "GDN CLASIC", "GDN HC", "DDN CLASIC", "DDN HC"
 const HEADER_RE = /^(GDN|DDN)\s+(CLASIC|HC)$/i;
 
-// Baris Armor: "-  GDN Armor (Warrior@Head) x 1"
+// Baris Armor
 const ARMOR_RE = /^-\s*(GDN|DDN)\s+Armor\s*\(([A-Za-z]+)@([A-Za-z ]+)\)\s*[xX]\s*(\d+)$/;
 
-// Baris Weapon: "-  GDN Weapon (Warrior@Axe) x 3"
+// Baris Weapon
 const WEAPON_RE = /^-\s*(GDN|DDN)\s+Weapon\s*\(([A-Za-z]+)@([A-Za-z ]+)\)\s*[xX]\s*(\d+)$/;
 
-// Baris Accessory: "-  GDN Unique Accessory (Earrings@STR AGI) X 20" atau "GDN Legend Accessory (...) X 34"
+// Baris Accessory: "unique/legend"
 const ACCESSORY_RE = /^-\s*(GDN|DDN)\s+(Unique|Legend)\s+Accessory\s*\(([A-Za-z]+)@([A-Za-z ]+)\)\s*[xX]\s*(\d+)$/;
 
 // Baris Material umum: "-  GDN Fragment x 1", "-  DDN Smelted Rune x 4", dst.

@@ -256,20 +256,26 @@ async function handlePartyButton(interaction, action, runId, roleCode) {
       return interaction.showModal(modal);
     }
 
-    case 'notify': {
-      if (!isHost(run, interaction.user.id)) {
-        return interaction.reply({ content: '⛔ Hanya host yang bisa notify.', ephemeral: true });
-      }
-      const requirements = partyService.getRequirements(runId);
-      const members = partyService.getActiveMembers(runId);
-      const summary = buildNotifySummary(run, requirements, members);
-      await interaction.reply({ content: summary });
-      await partyBoardService.refreshPartyBoard(interaction.client);
-      return;
-    }
+case 'notify': {
+  if (!isHost(run, interaction.user.id)) {
+    return interaction.reply({
+      content: '⛔ Hanya host yang bisa notify.',
+      ephemeral: true,
+    });
   }
-}
 
+  await interaction.deferReply({ ephemeral: true });
+
+  await partyBoardService.refreshPartyBoard(interaction.client);
+
+  await interaction.editReply({
+    content: '📡 Notify lintas-server terkirim.',
+  });
+
+  return;
+}
+  }// tutup switch
+} 
 async function handleSalaryButton(interaction, action, runId, extra) {
   const run = partyService.getRun(runId);
   if (!run) return interaction.reply({ content: '⚠️ Run tidak ditemukan.', ephemeral: true });
@@ -569,6 +575,20 @@ async function handleSelect(interaction) {
         await interaction.update({ content: '✅ Ditandai sudah dibayar.', components: [] });
         await refreshSalaryPanel(interaction.client, interaction.guild, runId);
         await notifyPaidMembers(interaction.client, runId, interaction.values);
+        await leaderboardService.refreshLeaderboards(interaction.client, interaction.guildId);
+
+        // Cek: kalau SEMUA member (yang gak di-exclude) udah lunas, tandain di thread.
+        // Dropdown Mark Paid otomatis nggak nawarin pilihan lagi begitu unpaid udah 0
+        // (lihat case 'markpaidselect'), jadi blok ini cuma bakal ke-trigger PERSIS
+        // sekali, di detik member terakhir di-mark paid.
+        const activeMembers = partyService.getActiveMembers(runId);
+        const paymentMap = salaryService.getPaymentMap(runId);
+        const stillUnpaid = activeMembers.filter(
+          (m) => !m.is_excluded_from_salary && !paymentMap[m.user_id]?.is_paid
+        );
+        if (stillUnpaid.length === 0) {
+          await interaction.channel.send('=====ALL DONE=====');
+        }
         return;
       }
       case 'removestamploanselect': {
@@ -585,6 +605,7 @@ async function handleSelect(interaction) {
         salaryService.unmarkPaid(runId, interaction.values);
         await interaction.update({ content: '↩️ Status dibayar dibatalkan.', components: [] });
         await refreshSalaryPanel(interaction.client, interaction.guild, runId);
+        await leaderboardService.refreshLeaderboards(interaction.client, interaction.guildId); // <-- tambah ini
         return;
       }
     }
@@ -612,7 +633,6 @@ async function handleModal(interaction) {
     return;
   }
 
-  if (ns === 'salary') {
     if (action === 'accountingmodal') {
       if (!isHost(run, interaction.user.id)) {
         return interaction.reply({ content: '⛔ Hanya host yang bisa nunjuk accounting.', ephemeral: true });
@@ -621,7 +641,15 @@ async function handleModal(interaction) {
       const ign = interaction.fields.getTextInputValue('ign');
       salaryService.setAccounting(runId, accountingUserId, ign);
 
-      // Ganti judul thread jadi "<judul asli> - <IGN acct>"
+      // Balas DULUAN sebelum ngerename thread — rename bisa kena rate limit Discord
+      // dan lambat, kalau ditaruh sebelum reply() bisa bikin token keburu expired (10062).
+      await interaction.reply({
+        content: `✅ <@${accountingUserId}> (${ign}) ditunjuk jadi accounting.`,
+        ephemeral: true,
+      });
+      await refreshSalaryPanel(interaction.client, interaction.guild, runId);
+
+      // Ganti judul thread (best-effort, gagal juga gapapa — udah ke-catch)
       const salaryThread = salaryService.getSalaryThreadByRunId(runId);
       if (salaryThread?.thread_id) {
         try {
@@ -633,12 +661,6 @@ async function handleModal(interaction) {
           console.warn('[accountingmodal] Gagal ubah nama thread:', err.message);
         }
       }
-
-      await interaction.reply({
-        content: `✅ <@${accountingUserId}> (${ign}) ditunjuk jadi accounting.`,
-        ephemeral: true,
-      });
-      await refreshSalaryPanel(interaction.client, interaction.guild, runId);
       return;
     }
 
@@ -704,7 +726,7 @@ async function handleModal(interaction) {
       await globalBoardService.refreshGlobalBoard(interaction.client);
       return;
     }
-  }
+  
 }
 
 // ============================================================
@@ -722,10 +744,6 @@ async function finalizeParty(interaction, run) {
     partyService.setStatus(run.id, 'locked'); // batalin "done", biar host bisa coba lagi setelah diatur
     return;
   }
-
-  const { t } = require('../i18n');
-  // ...
-  await interaction.editReply({ content: t(settings.language, 'partyDone', thread) });
 
   const salaryChannel = await interaction.client.channels.fetch(salaryChannelId);
   const threadType = settings.thread_visibility === 'public' ? ChannelType.PublicThread : ChannelType.PrivateThread;
@@ -778,5 +796,9 @@ async function finalizeParty(interaction, run) {
     console.warn('[finalizeParty] Gagal hapus pesan party lama:', err.message);
   }
 
-  await interaction.editReply({ content: `✅ Party selesai. Salary thread dibuat: ${thread}` });
+  // Party udah "Done" -> bersih-bersih diem-diem, GAK ping ulang server lain
+  await partyBoardService.cleanupPartyBoard(interaction.client);
+
+  const { t } = require('../i18n');
+  await interaction.editReply({ content: t(settings.language, 'partyDone', thread) });
 }

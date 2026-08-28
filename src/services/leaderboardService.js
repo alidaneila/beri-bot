@@ -53,7 +53,7 @@ function getWeekBoundaries(offsetWeeks) {
 
 function buildAllTimeEmbed(guildId) {
   const rows = getTopAllTime(guildId, 10);
-  const embed = new EmbedBuilder().setTitle('🏆 Top 10 Terkaya (All Time)').setColor(0xf1c40f);
+  const embed = new EmbedBuilder().setTitle('RICHEST PLAYER --all time').setColor(0xf1c40f);
   embed.setDescription(rows.length ? rows.map(rankLine).join('\n') : 'Belum ada pembayaran tercatat.');
   return embed;
 }
@@ -65,7 +65,7 @@ function buildWeeklyEmbed(guildId) {
   const rowsLast = getTopForRange(guildId, lastWeek.start, lastWeek.end, 5);
 
   return new EmbedBuilder()
-    .setTitle('📅 Top Richest Mingguan')
+    .setTitle('RICHEST PLAYER')
     .setColor(0x3498db)
     .addFields(
       { name: 'Minggu Ini', value: rowsThis.length ? rowsThis.map(rankLine).join('\n') : 'Belum ada.', inline: true },

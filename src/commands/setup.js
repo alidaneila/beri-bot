@@ -204,7 +204,6 @@ module.exports = {
       content: `✅ Pengaturan bot diperbarui:\n${lines.join('\n')}`,
       ephemeral: true,
     });
-  }  
-    return;
-  }
-},
+     return;
+  },
+};

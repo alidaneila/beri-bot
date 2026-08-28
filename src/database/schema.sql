@@ -64,6 +64,7 @@ CREATE TABLE IF NOT EXISTS salary_thread (
   accounting_ign              TEXT,       -- IGN (nama di game) accounting, diisi manual krn Discord gak nyimpen IGN
   is_finalized                INTEGER NOT NULL DEFAULT 0,
   title_paid_prefix_applied   INTEGER NOT NULL DEFAULT 0,
+  all_paid_suffix_applied     INTEGER NOT NULL DEFAULT 0,
   created_at                  TEXT DEFAULT (datetime('now'))
 );
 

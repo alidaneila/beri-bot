@@ -185,8 +185,8 @@ DDN CLASIC
 ----------------------------------------------------
 -  DDN Fragment x 1
 -  DDN Smelted Rune x 4
--  DDN Legend Strom Triangular x 8
--  DDN Unique Strom Triangular x 4
+-  DDN Legend Storm Triangular x 8
+-  DDN Unique Storm Triangular x 4
 -  DDN Legend Hot Spring x 8
 -  DDN Unique Hot Spring x 4
 ----------------------------------------------------
@@ -196,21 +196,21 @@ DDN CLASIC
 
 DDN HC
 
--  DDN Legend Accessory (Earrings@STR AGI) X 36
--  DDN Legend Accessory (Earrings@INT AGI) X 36
--  DDN Legend Accessory (Earrings@INT VIT) X 36
--  DDN Legend Accessory (Neckle@STR AGI) X 36
--  DDN Legend Accessory (Neckle@INT AGI) X 36
--  DDN Legend Accessory (Neckle@INT VIT) X 36
--  DDN Legend Accessory (Ring@ATP) X 36
--  DDN Legend Accessory (Ring@MTP) X 36
--  DDN Legend Accessory (Ring@MIX) X 36
+-  DDN Legend Accessory (Earrings@STR AGI) X 37
+-  DDN Legend Accessory (Earrings@INT AGI) X 37
+-  DDN Legend Accessory (Earrings@INT VIT) X 37
+-  DDN Legend Accessory (Neckle@STR AGI) X 37
+-  DDN Legend Accessory (Neckle@INT AGI) X 37
+-  DDN Legend Accessory (Neckle@INT VIT) X 37
+-  DDN Legend Accessory (Ring@ATP) X 37
+-  DDN Legend Accessory (Ring@MTP) X 37
+-  DDN Legend Accessory (Ring@MIX) X 37
 ----------------------------------------------------
 -  DDN Fragment x 1
 -  DDN Research Records x 3
 -  DDN Smelted Rune x 4
--  DDN Legend Strom Triangular x 8
--  DDN Unique Strom Triangular x 4
+-  DDN Legend Storm Triangular x 8
+-  DDN Unique Storm Triangular x 4
 -  DDN Legend Hot Spring x 8
 -  DDN Unique Hot Spring x 4
 ----------------------------------------------------

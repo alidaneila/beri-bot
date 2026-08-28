@@ -272,16 +272,40 @@ async function rebuildSalaryPanel(client, run, members) {
     .prepare(`SELECT COUNT(*) AS c FROM payment_status WHERE run_id = ? AND is_paid = 1`)
     .get(run.id).c;
 
+  const activeMembers = members.filter((m) => !m.is_excluded_from_salary);
+  const paidCount = db
+    .prepare(`SELECT COUNT(*) AS c FROM payment_status WHERE run_id = ? AND is_paid = 1`)
+    .get(run.id).c;
+  const allPaid = activeMembers.length > 0 && paidCount >= activeMembers.length;
+
+  let newName = thread.name;
+  let nameChanged = false;
+
+  // Prefix 💰 -> minimal 1 orang udah dibayar
   if (!salaryThread.title_paid_prefix_applied && anyPaid > 0) {
-    // Baru ada yang paid pertama kali -> kasih prefix
-    const newTitle = thread.name.startsWith('💰') ? thread.name : `💰 ${thread.name}`;
-    await thread.setName(newTitle.slice(0, 100));
+    newName = newName.startsWith('💰') ? newName : `💰 ${newName}`;
+    nameChanged = true;
     db.prepare(`UPDATE salary_thread SET title_paid_prefix_applied = 1 WHERE run_id = ?`).run(run.id);
   } else if (salaryThread.title_paid_prefix_applied && anyPaid === 0) {
-    // Semua yang paid di-undo -> lepas prefix, biar bisa nyala lagi nanti
-    const stripped = thread.name.replace(/^💰\s?/, '');
-    await thread.setName(stripped.slice(0, 100));
+    newName = newName.replace(/^💰\s?/, '');
+    nameChanged = true;
     db.prepare(`UPDATE salary_thread SET title_paid_prefix_applied = 0 WHERE run_id = ?`).run(run.id);
+  }
+
+  // Suffix 💵 -> SEMUA member (yang gak di-exclude) udah dibayar
+  if (!salaryThread.all_paid_suffix_applied && allPaid) {
+    newName = newName.endsWith('☑️') ? newName : `${newName} ☑️`;
+    nameChanged = true;
+    db.prepare(`UPDATE salary_thread SET all_paid_suffix_applied = 1 WHERE run_id = ?`).run(run.id);
+  } else if (salaryThread.all_paid_suffix_applied && !allPaid) {
+    // Ada yang di-undo, jadi gak 100% lunas lagi -> lepas suffix-nya
+    newName = newName.replace(/\s?☑️$/, '');
+    nameChanged = true;
+    db.prepare(`UPDATE salary_thread SET all_paid_suffix_applied = 0 WHERE run_id = ?`).run(run.id);
+  }
+
+  if (nameChanged) {
+    await thread.setName(newName.slice(0, 100));
   }
 
   return message;

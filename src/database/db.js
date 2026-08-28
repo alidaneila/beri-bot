@@ -38,8 +38,11 @@ if (!partyRunCols.includes('voice_info')) {
 }
 if (guildSettingsCols.length && !guildSettingsCols.includes('party_channel_id')) {
   db.exec(`ALTER TABLE guild_settings ADD COLUMN party_channel_id TEXT`);
+  console.log('[db] Migrasi selesai: kolom party_channel_id ditambah ke guild_settings.');
+}
+if (guildSettingsCols.length && !guildSettingsCols.includes('party_board_message_id')) {
   db.exec(`ALTER TABLE guild_settings ADD COLUMN party_board_message_id TEXT`);
-  console.log('[db] Migrasi selesai: kolom party board ditambah ke guild_settings.');
+  console.log('[db] Migrasi selesai: kolom party_board_message_id ditambah ke guild_settings.');
 }
 
 if (guildSettingsCols.length && !guildSettingsCols.includes('leaderboard_channel_id')) {
@@ -47,6 +50,12 @@ if (guildSettingsCols.length && !guildSettingsCols.includes('leaderboard_channel
   db.exec(`ALTER TABLE guild_settings ADD COLUMN leaderboard_alltime_message_id TEXT`);
   db.exec(`ALTER TABLE guild_settings ADD COLUMN leaderboard_weekly_message_id TEXT`);
   console.log('[db] Migrasi selesai: kolom leaderboard ditambah ke guild_settings.');
+}
+
+const salaryThreadCols = db.prepare(`PRAGMA table_info(salary_thread)`).all().map((c) => c.name);
+if (salaryThreadCols.length && !salaryThreadCols.includes('all_paid_suffix_applied')) {
+  db.exec(`ALTER TABLE salary_thread ADD COLUMN all_paid_suffix_applied INTEGER NOT NULL DEFAULT 0`);
+  console.log('[db] Migrasi selesai: kolom all_paid_suffix_applied ditambah ke salary_thread.');
 }
 
 module.exports = db;

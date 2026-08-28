@@ -43,7 +43,7 @@ client.on('guildCreate', async (guild) => {
       );
     if (channel) {
       await channel.send(
-        '👋 Makasih udah invite! Bot ini **private**, cuma bisa dipakai di server yang sudah di-approve owner. Minta owner bot jalanin `/approve` di server ini ya.'
+        '👋 Makasih udah invite!, Minta owner bot approve di server ini ya. biar bot bisa dipake'
       );
     }
   } catch (err) {

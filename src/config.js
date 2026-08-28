@@ -14,7 +14,7 @@ module.exports = {
 
   // Satu-satunya user yang boleh /approve server baru (bot ini private, approved-only).
   ownerUserId: required('OWNER_USER_ID'),
-  // Foto buat footer embed party & salary, biar orang tau ini bot siapa. Opsional.
+  // Foto buat footer embed party & salary, 
   ownerAvatarUrl: process.env.OWNER_AVATAR_URL || null,
 
   // LEGACY / FALLBACK — dulu dipakai buat single-server, sekarang tiap server ATUR SENDIRI
@@ -40,17 +40,17 @@ module.exports = {
   // keras cuma partyMemberCap di atas.
   // `emoji` cuma dipakai buat tombol, embed party sengaja polos tanpa emoji.
   roleRequirements: [
-    { code: 'FU', label: 'FU', emoji: '🔴', slots: 2 },
-    { code: 'HEALER', label: 'HEALER', emoji: '🏹', slots: 3, subroles: ['Priest', 'Physician', 'Light Fury'] },
-    { code: 'MC', label: 'MC', emoji: '🛡️', slots: 1 },
-    { code: 'SM', label: 'SM', emoji: '💥', slots: 1 },
-    { code: 'MT', label: 'MT', emoji: '🌿', slots: 2, subroles: ['Paladin', 'Destroyer'] },
-    { code: 'ICE_STACKING', label: 'ICE STACKING', emoji: '❄️', slots: 1, subroles: ['Adept', 'Elestra'] },
-    { code: 'ARCHER', label: 'ARCHER', emoji: '🎯', slots: 2 },
+    { code: 'FU', label: 'FU', emoji: '<:fu:1542743427630760066>', slots: 2 },
+    { code: 'HEALER', label: 'HEALER', emoji: '<:healer:1542751888850681876>', slots: 3, subroles: ['Priest', 'Physician', 'Light Fury'] },
+    { code: 'MC', label: 'MC', emoji: '<:mc:1542741911612293160>', slots: 1 },
+    { code: 'SM', label: 'SM', emoji: '<:sm:1542742065455173682>', slots: 1 },
+    { code: 'MT', label: 'MT', emoji: '<:mt:1542740966308454400>', slots: 2, subroles: ['Paladin', 'Destroyer'] },
+    { code: 'ICE_STACKING', label: 'ICE STACKING', emoji: '<:ice_stacking:1542741083103174708>', slots: 1, subroles: ['Adept', 'Elestra'] },
+    { code: 'ARCHER', label: 'ARCHER', emoji: '<:archer:1542741755554959370>', slots: 2 },
     {
       code: 'DPS',
       label: 'DPS',
-      emoji: '⚔️',
+      emoji: '<:dps:1542743252325634129>',
       slots: 3,
       subroles: ['Assassin', 'Artillery', 'Crusader', 'Dancer', 'Dark Avenger', 'Gear Master', 'Inquisitor', 'Sniper', 'Saleana', 'Shooting Star', 'Screamer'],
     },

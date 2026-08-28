@@ -46,11 +46,9 @@ function updateSettings(guildId, patch) {
   return getSettings(guildId);
 }
 
-/** Semua server yang punya unsold board aktif — dipakai globalBoardService buat broadcast. */
-function getGuildsWithBoard() {
-  return db
-    .prepare(`SELECT * FROM guild_settings WHERE unsold_board_channel_id IS NOT NULL`)
-    .all();
+/** SEMUA server yang punya settings tercatat — dipakai unsold board (wajib, bukan opsional). */
+function getAllApprovedSettings() {
+  return db.prepare(`SELECT * FROM guild_settings`).all();
 }
 
 module.exports = {
@@ -59,5 +57,5 @@ module.exports = {
   unapproveGuild,
   getSettings,
   updateSettings,
-  getGuildsWithBoard,
+  getAllApprovedSettings,
 };

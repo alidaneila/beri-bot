@@ -4,6 +4,9 @@
   "description": "Discord bot untuk pembentukan party raid (GDN/DDN) dan pembagian gaji/loot otomatis.",
   "main": "src/index.js",
   "type": "commonjs",
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "start": "node src/index.js",
     "deploy-commands": "node src/commands/deploy-commands.js",

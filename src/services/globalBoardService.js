@@ -98,10 +98,9 @@ async function buildBoardEmbed(client) {
 }
 
 /**
- * Refresh board di SEMUA server (wajib, bukan opsional) — fallback ke salary_channel_id
- * kalau unsold_board_channel_id belum di-set manual lewat /setup bot.
- * Dipanggil tiap ada mutasi loot_entry (nambah/hapus/isi harga item, cancel run).
- * Edit pesan lama kalau ada, kirim baru kalau belum/udah kehapus.
+ * Refresh board di semua server yang UDAH ngatur unsold_board_channel lewat /setup bot.
+ * Yang belum atur channel-nya sama sekali -> dikasih 1x pesan pengingat ke salary_channel
+ * (bukan nempelin board ke sana), biar admin sadar perlu /setup bot unsold_board_channel.
  */
 async function refreshGlobalBoard(client) {
   const guilds = guildSettingsService.getAllApprovedSettings();
@@ -110,11 +109,13 @@ async function refreshGlobalBoard(client) {
   const embed = await buildBoardEmbed(client);
 
   for (const g of guilds) {
-    const targetChannelId = g.unsold_board_channel_id || g.salary_channel_id;
-    if (!targetChannelId) continue; // belum ada channel apapun buat server ini, skip
+    if (!g.unsold_board_channel_id) {
+      await remindUnsoldBoardNotConfigured(client, g);
+      continue;
+    }
 
     try {
-      const channel = await client.channels.fetch(targetChannelId);
+      const channel = await client.channels.fetch(g.unsold_board_channel_id);
       if (g.unsold_board_message_id) {
         try {
           const msg = await channel.messages.fetch(g.unsold_board_message_id);
@@ -129,6 +130,22 @@ async function refreshGlobalBoard(client) {
     } catch (err) {
       console.warn(`[globalBoardService] Gagal update board guild ${g.guild_id}:`, err.message);
     }
+  }
+}
+
+/** Kirim pengingat SEKALI aja (biar gak spam tiap refresh) kalau unsold_board_channel belum diatur. */
+async function remindUnsoldBoardNotConfigured(client, g) {
+  if (g.unsold_board_reminder_sent) return; // udah pernah diingetin, gak usah lagi
+  if (!g.salary_channel_id) return; // gak ada channel sama sekali buat kirim pengingat
+
+  try {
+    const channel = await client.channels.fetch(g.salary_channel_id);
+    await channel.send(
+      '📦 Unsold board belum diatur buat server ini. Jalanin `/setup bot unsold_board_channel:#channel` biar item yang belum laku bisa ditampilin.'
+    );
+    guildSettingsService.updateSettings(g.guild_id, { unsold_board_reminder_sent: 1 });
+  } catch (err) {
+    console.warn(`[globalBoardService] Gagal kirim pengingat guild ${g.guild_id}:`, err.message);
   }
 }
 

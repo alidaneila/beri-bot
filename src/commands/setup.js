@@ -50,12 +50,6 @@ module.exports = {
             .addChannelTypes(ChannelType.GuildText)
             .setRequired(false)
         )
-        .addBooleanOption((opt) =>
-          opt
-            .setName('disable_board')
-            .setDescription('Matiin unsold board buat server ini')
-            .setRequired(false)
-        )
         .addChannelOption((opt) =>
           opt
             .setName('party_channel')
@@ -122,17 +116,8 @@ module.exports = {
 
     if (boardChannel) {
       patch.unsold_board_channel_id = boardChannel.id;
-      patch.unsold_board_message_id = null;
-      // channel ganti -> pesan lama gak relevan lagi
-    }
-
-    // Disable unsold board
-    const disableBoard =
-      interaction.options.getBoolean('disable_board');
-
-    if (disableBoard) {
-      patch.unsold_board_channel_id = null;
-      patch.unsold_board_message_id = null;
+      patch.unsold_board_message_id = null; // channel ganti -> pesan lama gak relevan lagi
+      patch.unsold_board_reminder_sent = 0; // reset, biar kalau nanti channel-nya dikosongin lagi bisa diingetin ulang
     }
 
     // Party board
@@ -181,7 +166,7 @@ module.exports = {
       `📦 Unsold board: ${
         updated.unsold_board_channel_id
           ? `<#${updated.unsold_board_channel_id}>`
-          : '*(nonaktif)*'
+          : '*(belum diatur — jalanin lagi command setup)*'
       }`,
 
       `🎉 Party channel: ${

@@ -58,4 +58,10 @@ if (salaryThreadCols.length && !salaryThreadCols.includes('all_paid_suffix_appli
   console.log('[db] Migrasi selesai: kolom all_paid_suffix_applied ditambah ke salary_thread.');
 }
 
+const guildSettingsCols2 = db.prepare(`PRAGMA table_info(guild_settings)`).all().map((c) => c.name);
+if (guildSettingsCols2.length && !guildSettingsCols2.includes('unsold_board_reminder_sent')) {
+  db.exec(`ALTER TABLE guild_settings ADD COLUMN unsold_board_reminder_sent INTEGER NOT NULL DEFAULT 0`);
+  console.log('[db] Migrasi selesai: kolom unsold_board_reminder_sent ditambah ke guild_settings.');
+}
+
 module.exports = db;

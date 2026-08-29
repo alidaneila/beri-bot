@@ -46,7 +46,7 @@ module.exports = {
     { code: 'SM', label: 'SM', emoji: '<:sm:1542742065455173682>', slots: 1 },
     { code: 'MT', label: 'MT', emoji: '<:mt:1542740966308454400>', slots: 2, subroles: ['Paladin', 'Destroyer'] },
     { code: 'ICE_STACKING', label: 'ICE STACKING', emoji: '<:ice_stacking:1542741083103174708>', slots: 1, subroles: ['Adept', 'Elestra'] },
-    { code: 'ARCHER', label: 'ARCHER', emoji: '<:archer:1542741755554959370>', slots: 2 },
+    { code: 'ACRO', label: 'ACRO', emoji: '<:archer:1542741755554959370>', slots: 2 },
     {
       code: 'DPS',
       label: 'DPS',

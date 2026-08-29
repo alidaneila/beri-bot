@@ -80,7 +80,7 @@ module.exports = [
     "tier": "Classic",
     "category": "Armor",
     "class": "Warrior",
-    "item_name": "GDN Armor (Warrior@Head)",
+    "item_name": "GDN Armor (Warrior@Helmet)",
     "stamp_cost": 1
   },
   {
@@ -752,7 +752,7 @@ module.exports = [
     "tier": "Classic",
     "category": "Armor",
     "class": "Warrior",
-    "item_name": "DDN Armor (Warrior@Head)",
+    "item_name": "DDN Armor (Warrior@Helmet)",
     "stamp_cost": 2
   },
   {
@@ -1248,7 +1248,7 @@ module.exports = [
     "tier": "Classic",
     "category": "Material",
     "class": null,
-    "item_name": "DDN Legend Strom Triangular",
+    "item_name": "DDN Legend Storm Triangular",
     "stamp_cost": 8
   },
   {
@@ -1256,7 +1256,7 @@ module.exports = [
     "tier": "Classic",
     "category": "Material",
     "class": null,
-    "item_name": "DDN Unique Strom Triangular",
+    "item_name": "DDN Unique Storm Triangular",
     "stamp_cost": 4
   },
   {
@@ -1281,7 +1281,7 @@ module.exports = [
     "category": "Accessory",
     "class": null,
     "item_name": "DDN Legend Accessory (Earrings@STR AGI)",
-    "stamp_cost": 36
+    "stamp_cost": 37
   },
   {
     "raid_type": "DDN",
@@ -1289,7 +1289,7 @@ module.exports = [
     "category": "Accessory",
     "class": null,
     "item_name": "DDN Legend Accessory (Earrings@INT AGI)",
-    "stamp_cost": 36
+    "stamp_cost": 37
   },
   {
     "raid_type": "DDN",
@@ -1297,7 +1297,7 @@ module.exports = [
     "category": "Accessory",
     "class": null,
     "item_name": "DDN Legend Accessory (Earrings@INT VIT)",
-    "stamp_cost": 36
+    "stamp_cost": 37
   },
   {
     "raid_type": "DDN",
@@ -1305,7 +1305,7 @@ module.exports = [
     "category": "Accessory",
     "class": null,
     "item_name": "DDN Legend Accessory (Neckle@STR AGI)",
-    "stamp_cost": 36
+    "stamp_cost": 37
   },
   {
     "raid_type": "DDN",
@@ -1313,7 +1313,7 @@ module.exports = [
     "category": "Accessory",
     "class": null,
     "item_name": "DDN Legend Accessory (Neckle@INT AGI)",
-    "stamp_cost": 36
+    "stamp_cost": 37
   },
   {
     "raid_type": "DDN",
@@ -1321,7 +1321,7 @@ module.exports = [
     "category": "Accessory",
     "class": null,
     "item_name": "DDN Legend Accessory (Neckle@INT VIT)",
-    "stamp_cost": 36
+    "stamp_cost": 37
   },
   {
     "raid_type": "DDN",
@@ -1329,7 +1329,7 @@ module.exports = [
     "category": "Accessory",
     "class": null,
     "item_name": "DDN Legend Accessory (Ring@ATP)",
-    "stamp_cost": 36
+    "stamp_cost": 37
   },
   {
     "raid_type": "DDN",
@@ -1337,7 +1337,7 @@ module.exports = [
     "category": "Accessory",
     "class": null,
     "item_name": "DDN Legend Accessory (Ring@MTP)",
-    "stamp_cost": 36
+    "stamp_cost": 37
   },
   {
     "raid_type": "DDN",
@@ -1345,7 +1345,7 @@ module.exports = [
     "category": "Accessory",
     "class": null,
     "item_name": "DDN Legend Accessory (Ring@MIX)",
-    "stamp_cost": 36
+    "stamp_cost": 37
   },
   {
     "raid_type": "DDN",
@@ -1376,7 +1376,7 @@ module.exports = [
     "tier": "HC",
     "category": "Material",
     "class": null,
-    "item_name": "DDN Legend Strom Triangular",
+    "item_name": "DDN Legend Storm Triangular",
     "stamp_cost": 8
   },
   {
@@ -1384,7 +1384,7 @@ module.exports = [
     "tier": "HC",
     "category": "Material",
     "class": null,
-    "item_name": "DDN Unique Strom Triangular",
+    "item_name": "DDN Unique Storm Triangular",
     "stamp_cost": 4
   },
   {

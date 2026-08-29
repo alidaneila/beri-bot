@@ -1,6 +1,16 @@
 const ignService = require('../services/ignService');
 const guildSettingsService = require('../services/guildSettingsService');
 
+// IGN cuma boleh huruf/angka, 2-20 karakter.
+// kepasang ke nickname atau nyangkut di data.
+const IGN_PATTERN = /^[\p{L}\p{N}]{2,20}$/u;
+
+function isValidIgn(raw) {
+  if (!raw) return false;
+  if (raw.includes('@') || raw.includes('<') || raw.includes('http')) return false;
+  return IGN_PATTERN.test(raw);
+}
+
 /**
  * Nangkep balesan IGN dari member yang lagi "ditunggu" (ditag first-timer di finalizeParty).
  * Kalau guild_settings.autonick nyala, nickname-nya diubah jadi "nama | IGN".
@@ -15,6 +25,20 @@ module.exports = async function handleMessageCreate(message) {
 
   const ign = message.content.trim();
   if (!ign) return;
+
+  // Validasi dulu SEBELUM disimpen. Kalau nggak valid, minta ulang dan JANGAN
+  // hapus pending capture-nya — biar user bisa langsung coba lagi di pesan berikutnya.
+  if (!isValidIgn(ign)) {
+    try {
+      await message.reply({
+        content: `⚠️ <@${message.author.id}> IGN "${ign.slice(0, 30)}" kurang valid. Pakai huruf/angka aja. Coba balas lagi ya.`,
+        allowedMentions: { users: [message.author.id] },
+      });
+    } catch (err) {
+      console.warn('[messageCreate] Gagal kirim pesan IGN invalid:', err.message);
+    }
+    return;
+  }
 
   ignService.saveIgn(message.guildId, message.author.id, ign);
   ignService.clearPendingCapture(message.channel.id, message.author.id);
@@ -36,6 +60,14 @@ module.exports = async function handleMessageCreate(message) {
     } catch (err) {
       // Biasanya gagal karena role bot di bawah role member itu, atau member = owner server.
       console.warn('[messageCreate] Gagal auto-nick:', err.message);
+      try {
+        await message.reply({
+          content: `✅ IGN kesimpen: **${ign}**. Tapi nick gagal diubah otomatis (kemungkinan role bot di bawah role kamu).`,
+          allowedMentions: { users: [] },
+        });
+      } catch (notifyErr) {
+        console.warn('[messageCreate] Gagal kirim notifikasi auto-nick gagal:', notifyErr.message);
+      }
     }
   }
 };

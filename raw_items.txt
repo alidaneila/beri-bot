@@ -9,7 +9,7 @@ GDN CLASIC
 -  GDN Unique Accessory (Ring@MTP) X 20
 -  GDN Unique Accessory (Ring@MIX) X 20
 ----------------------------------------------------
--  GDN Armor (Warrior@Head) x 1
+-  GDN Armor (Warrior@Helmet) x 1
 -  GDN Armor (Warrior@Shirt) x 1
 -  GDN Armor (Warrior@Pants) x 1
 -  GDN Armor (Warrior@Gloves) x 1
@@ -116,7 +116,7 @@ DDN CLASIC
 -  DDN Unique Accessory (Ring@MTP) X 22
 -  DDN Unique Accessory (Ring@MIX) X 22
 ----------------------------------------------------
--  DDN Armor (Warrior@Head) x 2
+-  DDN Armor (Warrior@Helmet) x 2
 -  DDN Armor (Warrior@Shirt) x 2
 -  DDN Armor (Warrior@Pants) x 2
 -  DDN Armor (Warrior@Gloves) x 2

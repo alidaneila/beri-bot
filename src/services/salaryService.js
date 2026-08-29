@@ -304,9 +304,17 @@ async function rebuildSalaryPanel(client, run, members) {
     db.prepare(`UPDATE salary_thread SET all_paid_suffix_applied = 0 WHERE run_id = ?`).run(run.id);
   }
 
-  if (nameChanged) {
+if (nameChanged) {
+  try {
     await thread.setName(newName.slice(0, 100));
+  } catch (err) {
+    if (err.code === 429 || err.status === 429) {
+      console.warn(`[rebuildSalaryPanel] Rename thread run #${run.id} kena rate limit Discord (max 2x/10 menit) — bakal keupdate otomatis, tunggu aja.`);
+    } else {
+      console.warn(`[rebuildSalaryPanel] Gagal rename thread run #${run.id}:`, err.message);
+    }
   }
+}
 
   return message;
 }

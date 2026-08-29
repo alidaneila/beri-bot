@@ -130,12 +130,15 @@ async function refreshPartyBoard(client) {
         }
       }
 
-      await channel.send({
+      const pingMsg = await channel.send({
         content: '@here ada party yang butuh member ⬇️',
         allowedMentions: { parse: ['everyone'] },
       });
       const msg = await channel.send(payload);
-      guildSettingsService.updateSettings(g.guild_id, { party_board_message_id: msg.id });
+      guildSettingsService.updateSettings(g.guild_id, {
+        party_board_message_id: msg.id,
+        party_board_ping_message_id: pingMsg.id,
+      });
     } catch (err) {
       console.warn(`[partyBoardService] Gagal update board guild ${g.guild_id}:`, err.message);
     }

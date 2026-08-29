@@ -78,7 +78,7 @@ module.exports = {
   const sub = interaction.options.getSubcommand();
 
   if (sub === 'bot') {
-    if (!interaction.member.permissions.has(PermissionFlagsBits.ManageGuild)) {
+    if (!interaction.memberPermissions?.has(PermissionFlagsBits.ManageGuild)) {
       await interaction.reply({
         content: '⛔ Cuma admin server yang bisa atur ini.',
         flags: MessageFlags.Ephemeral,

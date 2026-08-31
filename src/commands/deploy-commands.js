@@ -5,6 +5,7 @@ const itemAdd = require('./itemAdd');
 const lootAdd = require('./lootAdd');
 const approve = require('./approve');
 const setup = require('./setup');
+const adminCleanupParty = require('./adminCleanupParty');
 
 const commands = [
   party.data.toJSON(),
@@ -12,6 +13,7 @@ const commands = [
   lootAdd.data.toJSON(),
   approve.data.toJSON(),
   setup.data.toJSON(),
+  adminCleanupParty.data.toJSON(),
 ];
 
 const rest = new REST({ version: '10' }).setToken(config.token);

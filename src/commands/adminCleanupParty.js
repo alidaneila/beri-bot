@@ -39,7 +39,7 @@ function memberCount(runId) {
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName('admincleanup')
+    .setName('onlyowner')
     .setDescription('(Owner only) Lihat/hapus party_run yang nyangkut di DB untuk server ini')
     .addSubcommand((sub) =>
       sub.setName('list').setDescription('Tampilkan semua party run di server ini beserta ID-nya')

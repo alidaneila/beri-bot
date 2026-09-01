@@ -43,7 +43,7 @@ async function buildBoardEmbed(client) {
 
   const embed = new EmbedBuilder()
     .setTitle('📦 Item Belum Laku')
-    .setColor(0xf1c40f)
+    .setColor(0xa1c580)
     .setFooter({ text: 'Update otomatis tiap ada perubahan item di thread manapun' });
 
   if (!items.length) {

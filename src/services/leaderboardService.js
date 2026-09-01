@@ -53,7 +53,7 @@ function getWeekBoundaries(offsetWeeks) {
 
 function buildAllTimeEmbed(guildId) {
   const rows = getTopAllTime(guildId, 10);
-  const embed = new EmbedBuilder().setTitle('RICHEST PLAYER --all time').setColor(0xf1c40f);
+  const embed = new EmbedBuilder().setTitle('RICHEST PLAYER --all time').setColor(0x84ca68);
   embed.setDescription(rows.length ? rows.map(rankLine).join('\n') : 'Belum ada pembayaran tercatat.');
   return embed;
 }
@@ -66,7 +66,7 @@ function buildWeeklyEmbed(guildId) {
 
   return new EmbedBuilder()
     .setTitle('RICHEST PLAYER')
-    .setColor(0x3498db)
+    .setColor(0x68cac7)
     .addFields(
       { name: 'Minggu Ini', value: rowsThis.length ? rowsThis.map(rankLine).join('\n') : 'Belum ada.', inline: true },
       { name: 'Minggu Lalu', value: rowsLast.length ? rowsLast.map(rankLine).join('\n') : 'Belum ada.', inline: true }

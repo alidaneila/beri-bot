@@ -22,7 +22,7 @@ const client = new Client({
 });
 
 client.commands = new Collection();
-const commandFiles = ['party.js', 'itemAdd.js', 'lootAdd.js', 'approve.js', 'setup.js', 'adminCleanupParty.js'];
+const commandFiles = ['party.js', 'itemAdd.js', 'lootAdd.js', 'approve.js', 'setup.js', 'onlyowner.js'];
 for (const file of commandFiles) {
   const command = require(path.join(__dirname, 'commands', file));
   client.commands.set(command.data.name, command);

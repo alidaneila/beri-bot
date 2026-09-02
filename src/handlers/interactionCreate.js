@@ -159,6 +159,15 @@ async function handleButton(interaction) {
 /** Tombol ⏪ ◀ [halaman] ▶ ⏩ di board "Item Belum Laku". customId: unsoldboard:nav:<page>:<sort>:<filter> */
 async function handleUnsoldBoardButton(interaction, parts) {
   const [, action, pageRaw, sort, filter] = parts;
+
+  if (action === 'help') {
+    return interaction.reply({
+      content:
+        'Item dibawah telah disertai nama pemilik dan asal server, jika tertarik silahkan DM pemilik item yang tertera.',
+      flags: MessageFlags.Ephemeral,
+    });
+  }
+
   if (action !== 'nav') return; // tombol indikator halaman (disabled), gak perlu diapa-apain
   const page = Number(pageRaw) || 1;
   const payload = await globalBoardService.buildBoardPayload(interaction.client, { page, sort, filter });

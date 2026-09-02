@@ -1,9 +1,14 @@
 const {
-  EmbedBuilder,
+  ContainerBuilder,
+  SectionBuilder,
+  TextDisplayBuilder,
+  SeparatorBuilder,
+  SeparatorSpacingSize,
   ActionRowBuilder,
   ButtonBuilder,
   ButtonStyle,
   StringSelectMenuBuilder,
+  MessageFlags,
 } = require('discord.js');
 const db = require('../database/db');
 const guildSettingsService = require('./guildSettingsService');
@@ -65,10 +70,11 @@ function applyFilterAndSort(items, sort, filter) {
 }
 
 /**
- * Bangun payload (embed + tombol nav + dropdown sort/filter) untuk SATU halaman.
- * Fungsi ini murni dari state yang dikasih (page/sort/filter) + data DB saat ini —
- * dipakai baik buat refresh otomatis (reset ke halaman 1) maupun buat tombol
- * next/prev/sort/filter yang tinggal manggil interaction.update(payload).
+ * Bangun payload (Components V2 container: judul+?, dropdown sort/filter, list,
+ * tombol nav, footer) untuk SATU halaman. Fungsi ini murni dari state yang dikasih
+ * (page/sort/filter) + data DB saat ini — dipakai baik buat refresh otomatis
+ * (reset ke halaman 1) maupun buat tombol next/prev/sort/filter yang tinggal
+ * manggil interaction.update(payload).
  */
 async function buildBoardPayload(client, { page = 1, sort = 'oldest', filter = 'all' } = {}) {
   const allItems = getGlobalUnsoldItems();
@@ -78,15 +84,10 @@ async function buildBoardPayload(client, { page = 1, sort = 'oldest', filter = '
   const safePage = Math.min(Math.max(1, page), totalPages);
   const pageItems = items.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
 
-  const embed = new EmbedBuilder()
-    .setTitle('📦 Item Belum Laku')
-    .setColor(0xa1c580)
-    .setFooter({
-      text: `Halaman ${safePage}/${totalPages} · ${items.length} item · update otomatis tiap ada perubahan`,
-    });
-
+  // --- List isi item (dulu jadi embed description) ---
+  let listText;
   if (!items.length) {
-    embed.setDescription('Nggak ada item yang lagi nunggu harga saat ini. 🎉');
+    listText = 'Nggak ada item yang lagi nunggu harga saat ini. 🎉';
   } else {
     // Cache nama guild biar gak fetch berulang buat item dari server yang sama
     const guildNameCache = new Map();
@@ -108,36 +109,36 @@ async function buildBoardPayload(client, { page = 1, sort = 'oldest', filter = '
       const guildName = await resolveGuildName(it.guild_id);
       lines.push(`${name}${qtyText} | <@${it.responsible_id}> | ${guildName} | <t:${ts}:R>`);
     }
-    embed.setDescription(lines.join('\n').slice(0, 4000));
+    listText = lines.join('\n').slice(0, 4000);
   }
 
-const navRow = new ActionRowBuilder().addComponents(
-  new ButtonBuilder()
-    .setCustomId(`unsoldboard:nav:1:${sort}:${filter}:first`)
-    .setLabel('⏪')
-    .setStyle(ButtonStyle.Secondary)
-    .setDisabled(safePage <= 1),
-  new ButtonBuilder()
-    .setCustomId(`unsoldboard:nav:${safePage - 1}:${sort}:${filter}:prev`)
-    .setLabel('◀')
-    .setStyle(ButtonStyle.Secondary)
-    .setDisabled(safePage <= 1),
-  new ButtonBuilder()
-    .setCustomId('unsoldboard:noop')
-    .setLabel(`${safePage}/${totalPages}`)
-    .setStyle(ButtonStyle.Secondary)
-    .setDisabled(true),
-  new ButtonBuilder()
-    .setCustomId(`unsoldboard:nav:${safePage + 1}:${sort}:${filter}:next`)
-    .setLabel('▶')
-    .setStyle(ButtonStyle.Secondary)
-    .setDisabled(safePage >= totalPages),
-  new ButtonBuilder()
-    .setCustomId(`unsoldboard:nav:${totalPages}:${sort}:${filter}:last`)
-    .setLabel('⏩')
-    .setStyle(ButtonStyle.Secondary)
-    .setDisabled(safePage >= totalPages)
-);
+  const navRow = new ActionRowBuilder().addComponents(
+    new ButtonBuilder()
+      .setCustomId(`unsoldboard:nav:1:${sort}:${filter}:first`)
+      .setLabel('⏪')
+      .setStyle(ButtonStyle.Secondary)
+      .setDisabled(safePage <= 1),
+    new ButtonBuilder()
+      .setCustomId(`unsoldboard:nav:${safePage - 1}:${sort}:${filter}:prev`)
+      .setLabel('◀')
+      .setStyle(ButtonStyle.Secondary)
+      .setDisabled(safePage <= 1),
+    new ButtonBuilder()
+      .setCustomId('unsoldboard:noop')
+      .setLabel(`${safePage}/${totalPages}`)
+      .setStyle(ButtonStyle.Secondary)
+      .setDisabled(true),
+    new ButtonBuilder()
+      .setCustomId(`unsoldboard:nav:${safePage + 1}:${sort}:${filter}:next`)
+      .setLabel('▶')
+      .setStyle(ButtonStyle.Secondary)
+      .setDisabled(safePage >= totalPages),
+    new ButtonBuilder()
+      .setCustomId(`unsoldboard:nav:${totalPages}:${sort}:${filter}:last`)
+      .setLabel('⏩')
+      .setStyle(ButtonStyle.Secondary)
+      .setDisabled(safePage >= totalPages)
+  );
 
   const sortSelect = new StringSelectMenuBuilder()
     .setCustomId(`unsoldboard:sort:${filter}`)
@@ -149,13 +150,39 @@ const navRow = new ActionRowBuilder().addComponents(
     .setPlaceholder('Filter kategori')
     .addOptions(FILTER_OPTIONS.map((o) => ({ ...o, default: o.value === filter })));
 
-  const components = [
-    new ActionRowBuilder().addComponents(sortSelect),
-    new ActionRowBuilder().addComponents(filterSelect),
-  ];
-  if (items.length) components.unshift(navRow); // tombol nav gak perlu kalau lagi kosong
+  // --- Susun jadi 1 Container (Components V2), urutan dari atas ke bawah:
+  // judul + tombol "?" -> dropdown sort -> dropdown filter -> list item -> tombol nav -> footer kecil
+  const container = new ContainerBuilder().setAccentColor(0xa1c580);
 
-  return { embeds: [embed], components };
+  const headerSection = new SectionBuilder()
+    .addTextDisplayComponents(new TextDisplayBuilder().setContent('📦 **Item Belum Laku**'))
+    .setButtonAccessory(
+      new ButtonBuilder()
+        .setCustomId('unsoldboard:help')
+        .setLabel('?')
+        .setStyle(ButtonStyle.Secondary)
+    );
+  container.addSectionComponents(headerSection);
+
+  container.addSeparatorComponents(new SeparatorBuilder().setSpacing(SeparatorSpacingSize.Small));
+  container.addActionRowComponents(new ActionRowBuilder().addComponents(sortSelect));
+  container.addActionRowComponents(new ActionRowBuilder().addComponents(filterSelect));
+  container.addSeparatorComponents(new SeparatorBuilder().setSpacing(SeparatorSpacingSize.Small));
+
+  container.addTextDisplayComponents(new TextDisplayBuilder().setContent(listText));
+
+  if (items.length) {
+    container.addSeparatorComponents(new SeparatorBuilder().setSpacing(SeparatorSpacingSize.Small));
+    container.addActionRowComponents(navRow); // tombol nav gak perlu kalau lagi kosong
+  }
+
+  container.addTextDisplayComponents(
+    new TextDisplayBuilder().setContent(
+      `-# Halaman ${safePage}/${totalPages} · ${items.length} item · update otomatis tiap ada perubahan`
+    )
+  );
+
+  return { components: [container], flags: MessageFlags.IsComponentsV2 };
 }
 
 /**

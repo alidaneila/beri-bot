@@ -233,7 +233,9 @@ async function handlePartyButton(interaction, action, runId, roleCode) {
       partyService.setStatus(runId, 'cancelled');
       await interaction.reply({ content: '🗑️ Run dibatalkan.', flags: MessageFlags.Ephemeral });
       await refreshPartyPanel(interaction.client, partyService.getRun(runId));
-      await globalBoardService.refreshGlobalBoard(interaction.client);
+      // Bukan globalBoardService (itu board "Item Belum Laku") — yang perlu di-refresh
+      // di sini board "BUTUH ORANG" lintas-server, sama kayak yang dipanggil pas Done.
+      await partyBoardService.cleanupPartyBoard(interaction.client);
       return;
     }
 

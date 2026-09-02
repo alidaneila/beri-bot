@@ -71,7 +71,9 @@ if (guildSettingsCols2.length && !guildSettingsCols2.includes('unsold_board_remi
 
 const partyRunCols2 = db.prepare(`PRAGMA table_info(party_run)`).all().map((c) => c.name);
 if (!partyRunCols2.includes('last_activity_at')) {
-  db.exec(`ALTER TABLE party_run ADD COLUMN last_activity_at TEXT DEFAULT CURRENT_TIMESTAMP`);
+  // SQLite nggak izinin default non-konstan (CURRENT_TIMESTAMP) di ADD COLUMN kalau tabelnya
+  // udah ada isinya -> tambah kolom polos dulu (default NULL), baru backfill lewat UPDATE.
+  db.exec(`ALTER TABLE party_run ADD COLUMN last_activity_at TEXT`);
   // Party lama diisi last_activity_at = created_at, biar yang emang udah lama banget
   // nganggur langsung kena auto-cancel di sweep pertama (bukan malah dianggap "baru aktif").
   db.exec(`UPDATE party_run SET last_activity_at = created_at WHERE last_activity_at IS NULL`);

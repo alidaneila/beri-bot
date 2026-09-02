@@ -145,11 +145,24 @@ module.exports = async function interactionCreate(interaction) {
 // BUTTONS
 // ============================================================
 async function handleButton(interaction) {
-  const [ns, action, runIdRaw, extra] = interaction.customId.split(':');
+  const parts = interaction.customId.split(':');
+  const [ns, action, runIdRaw, extra] = parts;
+
+  if (ns === 'unsoldboard') return handleUnsoldBoardButton(interaction, parts);
+
   const runId = Number(runIdRaw);
 
   if (ns === 'party') return handlePartyButton(interaction, action, runId, extra);
   if (ns === 'salary') return handleSalaryButton(interaction, action, runId, extra);
+}
+
+/** Tombol ⏪ ◀ [halaman] ▶ ⏩ di board "Item Belum Laku". customId: unsoldboard:nav:<page>:<sort>:<filter> */
+async function handleUnsoldBoardButton(interaction, parts) {
+  const [, action, pageRaw, sort, filter] = parts;
+  if (action !== 'nav') return; // tombol indikator halaman (disabled), gak perlu diapa-apain
+  const page = Number(pageRaw) || 1;
+  const payload = await globalBoardService.buildBoardPayload(interaction.client, { page, sort, filter });
+  await interaction.update(payload);
 }
 
 async function handlePartyButton(interaction, action, runId, roleCode) {
@@ -269,6 +282,7 @@ case 'notify': {
 
   await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 
+  partyService.touchActivity(runId);
   await partyBoardService.refreshPartyBoard(interaction.client);
 
   await interaction.editReply({
@@ -448,8 +462,12 @@ async function handleSalaryButton(interaction, action, runId, extra) {
 // SELECT MENUS
 // ============================================================
 async function handleSelect(interaction) {
-  const [ns, action, runIdRaw] = interaction.customId.split(':');
-  const runId = Number(runIdRaw);
+  const parts = interaction.customId.split(':');
+  const [ns, action] = parts;
+
+  if (ns === 'unsoldboard') return handleUnsoldBoardSelect(interaction, action, parts);
+
+  const runId = Number(parts[2]);
   const run = partyService.getRun(runId);
   if (!run) return interaction.reply({ content: '⚠️ Run tidak ditemukan.', flags: MessageFlags.Ephemeral });
 
@@ -613,6 +631,24 @@ async function handleSelect(interaction) {
       }
     }
   }
+}
+
+/** Dropdown "Urutkan" & "Filter kategori" di board "Item Belum Laku". Reset ke halaman 1 tiap ganti. */
+async function handleUnsoldBoardSelect(interaction, action, parts) {
+  const chosen = interaction.values[0];
+  let sort = 'oldest';
+  let filter = 'all';
+
+  if (action === 'sort') {
+    sort = chosen;
+    filter = parts[2] || 'all'; // filter lama dibawa dari customId dropdown ini
+  } else if (action === 'filter') {
+    filter = chosen;
+    sort = parts[2] || 'oldest'; // sort lama dibawa dari customId dropdown ini
+  }
+
+  const payload = await globalBoardService.buildBoardPayload(interaction.client, { page: 1, sort, filter });
+  await interaction.update(payload);
 }
 
 // ============================================================

@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS party_run (
   tier              TEXT,                -- opsional, tidak diminta lagi saat /createparty (bisa null)
   status            TEXT NOT NULL DEFAULT 'open', -- open | locked | done | cancelled
   created_at        TEXT DEFAULT (datetime('now')),
+  last_activity_at  TEXT DEFAULT (datetime('now')), -- di-update tiap ada aktivitas, dipakai buat auto-cancel
   voice_info        TEXT
 );
 

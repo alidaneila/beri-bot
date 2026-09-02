@@ -69,4 +69,13 @@ if (guildSettingsCols2.length && !guildSettingsCols2.includes('unsold_board_remi
   console.log('[db] Migrasi selesai: kolom unsold_board_reminder_sent ditambah ke guild_settings.');
 }
 
+const partyRunCols2 = db.prepare(`PRAGMA table_info(party_run)`).all().map((c) => c.name);
+if (!partyRunCols2.includes('last_activity_at')) {
+  db.exec(`ALTER TABLE party_run ADD COLUMN last_activity_at TEXT DEFAULT CURRENT_TIMESTAMP`);
+  // Party lama diisi last_activity_at = created_at, biar yang emang udah lama banget
+  // nganggur langsung kena auto-cancel di sweep pertama (bukan malah dianggap "baru aktif").
+  db.exec(`UPDATE party_run SET last_activity_at = created_at WHERE last_activity_at IS NULL`);
+  console.log('[db] Migrasi selesai: kolom last_activity_at ditambah ke party_run.');
+}
+
 module.exports = db;

@@ -4,9 +4,12 @@ const config = require('./config');
 const interactionCreate = require('./handlers/interactionCreate');
 const messageCreate = require('./handlers/messageCreate');
 const guildSettingsService = require('./services/guildSettingsService');
+const partyLifecycleService = require('./services/partyLifecycleService');
 
 // Pastikan database & skema kebentuk sebelum command diakses
 require('./database/db');
+
+const AUTO_CANCEL_CHECK_INTERVAL_MS = 30 * 60 * 1000; // cek tiap 30 menit
 
 const client = new Client({
   intents: [
@@ -19,7 +22,7 @@ const client = new Client({
 });
 
 client.commands = new Collection();
-const commandFiles = ['party.js', 'itemAdd.js', 'lootAdd.js', 'approve.js', 'setup.js', 'onlyowner.js'];
+const commandFiles = ['party.js', 'itemAdd.js', 'lootAdd.js', 'approve.js', 'setup.js', 'adminCleanupParty.js'];
 for (const file of commandFiles) {
   const command = require(path.join(__dirname, 'commands', file));
   client.commands.set(command.data.name, command);
@@ -27,6 +30,14 @@ for (const file of commandFiles) {
 
 client.once('clientReady', () => {
   console.log(`[bot] Login sebagai ${client.user.tag}`);
+
+  const runAutoCancelSweep = () => {
+    partyLifecycleService.autoCancelStaleParties(client).catch((err) => {
+      console.warn('[autoCancelStaleParties] error:', err.message);
+    });
+  };
+  runAutoCancelSweep(); // langsung cek sekali pas start, jangan nunggu 30 menit pertama
+  setInterval(runAutoCancelSweep, AUTO_CANCEL_CHECK_INTERVAL_MS);
 });
 
 client.on('interactionCreate', interactionCreate);

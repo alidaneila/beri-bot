@@ -82,6 +82,7 @@ function joinRole(runId, userId, roleCode, subrole = null) {
   db.prepare(
     `INSERT INTO party_member (run_id, user_id, role_code, subrole) VALUES (?, ?, ?, ?)`
   ).run(runId, userId, roleCode, subrole);
+  touchActivity(runId);
   return { ok: true };
 }
 
@@ -89,6 +90,7 @@ function cancelRole(runId, userId) {
   const info = db
     .prepare(`DELETE FROM party_member WHERE run_id = ? AND user_id = ?`)
     .run(runId, userId);
+  if (info.changes > 0) touchActivity(runId);
   return info.changes > 0;
 }
 
@@ -97,14 +99,33 @@ function removeMember(runId, userId, roleCode) {
   db.prepare(
     `UPDATE party_member SET is_removed = 1 WHERE run_id = ? AND user_id = ? AND role_code = ?`
   ).run(runId, userId, roleCode);
+  touchActivity(runId);
 }
 
 function setStatus(runId, status) {
   db.prepare(`UPDATE party_run SET status = ? WHERE id = ?`).run(status, runId);
+  touchActivity(runId);
 }
 
 function editTitle(runId, title) {
   db.prepare(`UPDATE party_run SET title = ? WHERE id = ?`).run(title, runId);
+  touchActivity(runId);
+}
+
+/** Dipanggil tiap ada aktivitas di run ini (join/cancel role/remove/lock/edit title/notify). */
+function touchActivity(runId) {
+  db.prepare(`UPDATE party_run SET last_activity_at = datetime('now') WHERE id = ?`).run(runId);
+}
+
+/** Party open/locked yang udah >= `hours` jam nggak ada aktivitas sama sekali. */
+function getStaleOpenRuns(hours) {
+  return db
+    .prepare(
+      `SELECT * FROM party_run
+       WHERE status IN ('open','locked')
+         AND datetime(last_activity_at) <= datetime('now', ?)`
+    )
+    .all(`-${hours} hours`);
 }
 
 module.exports = {
@@ -121,4 +142,6 @@ module.exports = {
   removeMember,
   setStatus,
   editTitle,
+  touchActivity,
+  getStaleOpenRuns,
 };

@@ -111,33 +111,33 @@ async function buildBoardPayload(client, { page = 1, sort = 'oldest', filter = '
     embed.setDescription(lines.join('\n').slice(0, 4000));
   }
 
-  const navRow = new ActionRowBuilder().addComponents(
-    new ButtonBuilder()
-      .setCustomId(`unsoldboard:nav:1:${sort}:${filter}`)
-      .setLabel('⏪')
-      .setStyle(ButtonStyle.Secondary)
-      .setDisabled(safePage <= 1),
-    new ButtonBuilder()
-      .setCustomId(`unsoldboard:nav:${safePage - 1}:${sort}:${filter}`)
-      .setLabel('◀')
-      .setStyle(ButtonStyle.Secondary)
-      .setDisabled(safePage <= 1),
-    new ButtonBuilder()
-      .setCustomId('unsoldboard:noop')
-      .setLabel(`${safePage}/${totalPages}`)
-      .setStyle(ButtonStyle.Secondary)
-      .setDisabled(true),
-    new ButtonBuilder()
-      .setCustomId(`unsoldboard:nav:${safePage + 1}:${sort}:${filter}`)
-      .setLabel('▶')
-      .setStyle(ButtonStyle.Secondary)
-      .setDisabled(safePage >= totalPages),
-    new ButtonBuilder()
-      .setCustomId(`unsoldboard:nav:${totalPages}:${sort}:${filter}`)
-      .setLabel('⏩')
-      .setStyle(ButtonStyle.Secondary)
-      .setDisabled(safePage >= totalPages)
-  );
+const navRow = new ActionRowBuilder().addComponents(
+  new ButtonBuilder()
+    .setCustomId(`unsoldboard:nav:1:${sort}:${filter}:first`)
+    .setLabel('⏪')
+    .setStyle(ButtonStyle.Secondary)
+    .setDisabled(safePage <= 1),
+  new ButtonBuilder()
+    .setCustomId(`unsoldboard:nav:${safePage - 1}:${sort}:${filter}:prev`)
+    .setLabel('◀')
+    .setStyle(ButtonStyle.Secondary)
+    .setDisabled(safePage <= 1),
+  new ButtonBuilder()
+    .setCustomId('unsoldboard:noop')
+    .setLabel(`${safePage}/${totalPages}`)
+    .setStyle(ButtonStyle.Secondary)
+    .setDisabled(true),
+  new ButtonBuilder()
+    .setCustomId(`unsoldboard:nav:${safePage + 1}:${sort}:${filter}:next`)
+    .setLabel('▶')
+    .setStyle(ButtonStyle.Secondary)
+    .setDisabled(safePage >= totalPages),
+  new ButtonBuilder()
+    .setCustomId(`unsoldboard:nav:${totalPages}:${sort}:${filter}:last`)
+    .setLabel('⏩')
+    .setStyle(ButtonStyle.Secondary)
+    .setDisabled(safePage >= totalPages)
+);
 
   const sortSelect = new StringSelectMenuBuilder()
     .setCustomId(`unsoldboard:sort:${filter}`)

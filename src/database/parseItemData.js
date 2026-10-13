@@ -15,19 +15,19 @@ const raw = fs.readFileSync(RAW_PATH, 'utf8');
 const lines = raw.split('\n').map((l) => l.trim());
 
 // Header section menandai raid_type + tier, contoh: "GDN CLASIC", "GDN HC", "DDN CLASIC", "DDN HC"
-const HEADER_RE = /^(GDN|DDN)\s+(CLASIC|HC)$/i;
+const HEADER_RE = /^(GDN|DDN|BDN)\s+(CLASIC|HC)$/i;
 
 // Baris Armor
-const ARMOR_RE = /^-\s*(GDN|DDN)\s+Armor\s*\(([A-Za-z]+)@([A-Za-z ]+)\)\s*[xX]\s*(\d+)$/;
+const ARMOR_RE = /^-\s*(GDN|DDN|BDN)\s+Armor\s*\(([A-Za-z]+)@([A-Za-z ]+)\)\s*[xX]\s*(\d+)$/;
 
 // Baris Weapon
-const WEAPON_RE = /^-\s*(GDN|DDN)\s+Weapon\s*\(([A-Za-z]+)@([A-Za-z ]+)\)\s*[xX]\s*(\d+)$/;
+const WEAPON_RE = /^-\s*(GDN|DDN|BDN)\s+Weapon\s*\(([A-Za-z]+)@([A-Za-z ]+)\)\s*[xX]\s*(\d+)$/;
 
 // Baris Accessory: "unique/legend"
-const ACCESSORY_RE = /^-\s*(GDN|DDN)\s+(Unique|Legend)\s+Accessory\s*\(([A-Za-z]+)@([A-Za-z ]+)\)\s*[xX]\s*(\d+)$/;
+const ACCESSORY_RE = /^-\s*(GDN|DDN|BDN)\s+(Unique|Legend)\s+Accessory\s*\(([A-Za-z]+)@([A-Za-z ]+)\)\s*[xX]\s*(\d+)$/;
 
 // Baris Material umum: "-  GDN Fragment x 1", "-  DDN Smelted Rune x 4", dst.
-const MATERIAL_RE = /^-\s*((GDN|DDN)\s+.+?)\s*[xX]\s*(\d+)$/;
+const MATERIAL_RE = /^-\s*((GDN|DDN|BDN)\s+.+?)\s*[xX]\s*(\d+)$/;
 
 let currentRaid = null;
 let currentTier = null;

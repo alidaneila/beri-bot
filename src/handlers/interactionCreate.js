@@ -167,6 +167,15 @@ async function handleUnsoldBoardButton(interaction, parts) {
       flags: MessageFlags.Ephemeral,
     });
   }
+    if (action === 'filteropen') {
+    return interaction.reply(
+      globalBoardService.buildFilterPickerPayload({
+        sort,
+        filter,
+        boardMessageId: interaction.message.id,
+      })
+    );
+  }
 
   if (action !== 'nav') return; // tombol indikator halaman (disabled), gak perlu diapa-apain
   const page = Number(pageRaw) || 1;
@@ -645,21 +654,38 @@ async function handleSelect(interaction) {
 /** Dropdown "Urutkan" & "Filter kategori" di board "Item Belum Laku". Reset ke halaman 1 tiap ganti. */
 async function handleUnsoldBoardSelect(interaction, action, parts) {
   const chosen = interaction.values[0];
-  let sort = 'oldest';
-  let filter = 'all';
 
-  if (action === 'sort') {
-    sort = chosen;
-    filter = parts[2] || 'all'; // filter lama dibawa dari customId dropdown ini
-  } else if (action === 'filter') {
-    filter = chosen;
-    sort = parts[2] || 'oldest'; // sort lama dibawa dari customId dropdown ini
+  // Dropdown filter datang dari pesan ephemeral -> yang di-edit board utamanya
+  if (action === 'filter') {
+    const sort = parts[2] || 'oldest';
+    const boardMessageId = parts[3];
+    const payload = await globalBoardService.buildBoardPayload(interaction.client, {
+      page: 1,
+      sort,
+      filter: chosen,
+    });
+
+    try {
+      const channel =
+        interaction.channel ?? (await interaction.client.channels.fetch(interaction.channelId));
+      const boardMsg = await channel.messages.fetch(boardMessageId);
+      await boardMsg.edit(payload);
+    } catch (err) {
+      return interaction.update({ content: 'Board-nya nggak ketemu, mungkin sudah dihapus.', components: [] });
+    }
+
+    return interaction.update({ content: '✅ Filter diterapkan.', components: [] });
   }
 
-  const payload = await globalBoardService.buildBoardPayload(interaction.client, { page: 1, sort, filter });
+  // Dropdown sort ada di board utama -> update langsung
+  const filter = parts[2] || 'all';
+  const payload = await globalBoardService.buildBoardPayload(interaction.client, {
+    page: 1,
+    sort: chosen,
+    filter,
+  });
   await interaction.update(payload);
 }
-
 // ============================================================
 // MODALS
 // ============================================================

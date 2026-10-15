@@ -73,7 +73,7 @@ function buildPartyRows(run, requirements = [], members = []) {
       .setDisabled(run.status === 'done' || run.status === 'cancelled'),
     new ButtonBuilder()
       .setCustomId(`party:notify:${run.id}`)
-      .setLabel('Notify global')
+      .setLabel('Butuh Orang!')
       .setEmoji('📣')
       .setStyle(ButtonStyle.Secondary)
       .setDisabled(run.status === 'done' || run.status === 'cancelled')

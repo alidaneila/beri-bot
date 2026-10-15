@@ -16,8 +16,8 @@ const guildSettingsService = require('./guildSettingsService');
 const PAGE_SIZE = 10;
 
 const SORT_OPTIONS = [
-  { value: 'oldest', label: 'Terlama dulu' },
-  { value: 'newest', label: 'Terbaru dulu' },
+  { value: 'oldest', label: 'terlama / oldest' },
+  { value: 'newest', label: 'terbaru / newest' },
 ];
 
 // Sesuai kolom item_catalog.category ('Accessory' | 'Armor' | 'Material').
@@ -142,38 +142,51 @@ async function buildBoardPayload(client, { page = 1, sort = 'oldest', filter = '
 
   const sortSelect = new StringSelectMenuBuilder()
     .setCustomId(`unsoldboard:sort:${filter}`)
-    .setPlaceholder('Urutkan berdasarkan tanggal')
+    .setPlaceholder('Sort by')
     .addOptions(SORT_OPTIONS.map((o) => ({ ...o, default: o.value === sort })));
 
-  const filterSelect = new StringSelectMenuBuilder()
-    .setCustomId(`unsoldboard:filter:${sort}`)
-    .setPlaceholder('Filter kategori')
-    .addOptions(FILTER_OPTIONS.map((o) => ({ ...o, default: o.value === filter })));
+  const filterLabel = FILTER_OPTIONS.find((o) => o.value === filter)?.label ?? 'Semua kategori';
 
-  // --- Susun jadi 1 Container (Components V2), urutan dari atas ke bawah:
-  // judul + tombol "?" -> dropdown sort -> dropdown filter -> list item -> tombol nav -> footer kecil
   const container = new ContainerBuilder().setAccentColor(0xa1c580);
 
-  const headerSection = new SectionBuilder()
-    .addTextDisplayComponents(new TextDisplayBuilder().setContent('📦 **Item Belum Laku**'))
-    .setButtonAccessory(
-      new ButtonBuilder()
-        .setCustomId('unsoldboard:help')
-        .setLabel('?')
-        .setStyle(ButtonStyle.Secondary)
-    );
-  container.addSectionComponents(headerSection);
+  // Judul + tombol "?"
+  container.addSectionComponents(
+    new SectionBuilder()
+      .addTextDisplayComponents(new TextDisplayBuilder().setContent('📦 **Item Belum Laku**'))
+      .setButtonAccessory(
+        new ButtonBuilder()
+          .setCustomId('unsoldboard:help')
+          .setLabel('?')
+          .setStyle(ButtonStyle.Secondary)
+      )
+  );
 
   container.addSeparatorComponents(new SeparatorBuilder().setSpacing(SeparatorSpacingSize.Small));
+
+  // Teks filter aktif + tombol Filter kecil di kanan
+  container.addSectionComponents(
+    new SectionBuilder()
+      .addTextDisplayComponents(
+        new TextDisplayBuilder().setContent(`**Filter kategori:** \`${filterLabel}\``)
+      )
+      .setButtonAccessory(
+        new ButtonBuilder()
+          .setCustomId(`unsoldboard:filteropen:${safePage}:${sort}:${filter}`)
+          .setLabel('Filter')
+          .setEmoji('1560182300094890036')
+          .setStyle(ButtonStyle.Secondary)
+      )
+  );
+
+  // Dropdown sort
   container.addActionRowComponents(new ActionRowBuilder().addComponents(sortSelect));
-  container.addActionRowComponents(new ActionRowBuilder().addComponents(filterSelect));
-  container.addSeparatorComponents(new SeparatorBuilder().setSpacing(SeparatorSpacingSize.Small));
 
+  container.addSeparatorComponents(new SeparatorBuilder().setSpacing(SeparatorSpacingSize.Small));
   container.addTextDisplayComponents(new TextDisplayBuilder().setContent(listText));
 
   if (items.length) {
     container.addSeparatorComponents(new SeparatorBuilder().setSpacing(SeparatorSpacingSize.Small));
-    container.addActionRowComponents(navRow); // tombol nav gak perlu kalau lagi kosong
+    container.addActionRowComponents(navRow);
   }
 
   container.addTextDisplayComponents(
@@ -183,6 +196,20 @@ async function buildBoardPayload(client, { page = 1, sort = 'oldest', filter = '
   );
 
   return { components: [container], flags: MessageFlags.IsComponentsV2 };
+}
+
+/** Pesan ephemeral berisi dropdown filter kategori (muncul pas tombol "Filter" diklik). */
+function buildFilterPickerPayload({ sort, filter, boardMessageId }) {
+  const select = new StringSelectMenuBuilder()
+    .setCustomId(`unsoldboard:filter:${sort}:${boardMessageId}`)
+    .setPlaceholder('Pilih kategori')
+    .addOptions(FILTER_OPTIONS.map((o) => ({ ...o, default: o.value === filter })));
+
+  return {
+    content: 'Pilih kategori yang mau ditampilkan:',
+    components: [new ActionRowBuilder().addComponents(select)],
+    flags: MessageFlags.Ephemeral,
+  };
 }
 
 /**
@@ -241,4 +268,4 @@ async function remindUnsoldBoardNotConfigured(client, g) {
   }
 }
 
-module.exports = { getGlobalUnsoldItems, buildBoardPayload, refreshGlobalBoard };
+module.exports = { getGlobalUnsoldItems, buildBoardPayload, buildFilterPickerPayload, refreshGlobalBoard };

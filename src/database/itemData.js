@@ -1409,7 +1409,7 @@ module.exports = [
     "category": "Accessory",
     "class": null,
     "item_name": "BDN Unique Accessory (Earrings@STR AGI)",
-    "stamp_cost": 24
+    "stamp_cost": 22
   },
   {
     "raid_type": "BDN",
@@ -1417,7 +1417,7 @@ module.exports = [
     "category": "Accessory",
     "class": null,
     "item_name": "BDN Unique Accessory (Earrings@INT AGI)",
-    "stamp_cost": 24
+    "stamp_cost": 22
   },
   {
     "raid_type": "BDN",
@@ -1425,7 +1425,7 @@ module.exports = [
     "category": "Accessory",
     "class": null,
     "item_name": "BDN Unique Accessory (Earrings@INT VIT)",
-    "stamp_cost": 24
+    "stamp_cost": 22
   },
   {
     "raid_type": "BDN",
@@ -1433,7 +1433,7 @@ module.exports = [
     "category": "Accessory",
     "class": null,
     "item_name": "BDN Unique Accessory (Neckle@STR AGI)",
-    "stamp_cost": 24
+    "stamp_cost": 22
   },
   {
     "raid_type": "BDN",
@@ -1441,7 +1441,7 @@ module.exports = [
     "category": "Accessory",
     "class": null,
     "item_name": "BDN Unique Accessory (Neckle@INT AGI)",
-    "stamp_cost": 24
+    "stamp_cost": 22
   },
   {
     "raid_type": "BDN",
@@ -1449,7 +1449,7 @@ module.exports = [
     "category": "Accessory",
     "class": null,
     "item_name": "BDN Unique Accessory (Neckle@INT VIT)",
-    "stamp_cost": 24
+    "stamp_cost": 22
   },
   {
     "raid_type": "BDN",
@@ -1457,7 +1457,7 @@ module.exports = [
     "category": "Accessory",
     "class": null,
     "item_name": "BDN Unique Accessory (Ring@ATP)",
-    "stamp_cost": 24
+    "stamp_cost": 22
   },
   {
     "raid_type": "BDN",
@@ -1465,7 +1465,7 @@ module.exports = [
     "category": "Accessory",
     "class": null,
     "item_name": "BDN Unique Accessory (Ring@MTP)",
-    "stamp_cost": 24
+    "stamp_cost": 22
   },
   {
     "raid_type": "BDN",
@@ -1473,7 +1473,7 @@ module.exports = [
     "category": "Accessory",
     "class": null,
     "item_name": "BDN Unique Accessory (Ring@MIX)",
-    "stamp_cost": 24
+    "stamp_cost": 22
   },
   {
     "raid_type": "BDN",
@@ -1481,7 +1481,7 @@ module.exports = [
     "category": "Armor",
     "class": "Warrior",
     "item_name": "BDN Armor (Warrior@Head)",
-    "stamp_cost": 3
+    "stamp_cost": 2
   },
   {
     "raid_type": "BDN",
@@ -1489,7 +1489,7 @@ module.exports = [
     "category": "Armor",
     "class": "Warrior",
     "item_name": "BDN Armor (Warrior@Shirt)",
-    "stamp_cost": 3
+    "stamp_cost": 2
   },
   {
     "raid_type": "BDN",
@@ -1497,7 +1497,7 @@ module.exports = [
     "category": "Armor",
     "class": "Warrior",
     "item_name": "BDN Armor (Warrior@Pants)",
-    "stamp_cost": 3
+    "stamp_cost": 2
   },
   {
     "raid_type": "BDN",
@@ -1505,7 +1505,7 @@ module.exports = [
     "category": "Armor",
     "class": "Warrior",
     "item_name": "BDN Armor (Warrior@Gloves)",
-    "stamp_cost": 3
+    "stamp_cost": 2
   },
   {
     "raid_type": "BDN",
@@ -1513,7 +1513,7 @@ module.exports = [
     "category": "Armor",
     "class": "Warrior",
     "item_name": "BDN Armor (Warrior@Boots)",
-    "stamp_cost": 3
+    "stamp_cost": 2
   },
   {
     "raid_type": "BDN",
@@ -1521,7 +1521,7 @@ module.exports = [
     "category": "Weapon",
     "class": "Warrior",
     "item_name": "BDN Weapon (Warrior@Axe)",
-    "stamp_cost": 5
+    "stamp_cost": 4
   },
   {
     "raid_type": "BDN",
@@ -1529,7 +1529,7 @@ module.exports = [
     "category": "Weapon",
     "class": "Warrior",
     "item_name": "BDN Weapon (Warrior@Hammer)",
-    "stamp_cost": 5
+    "stamp_cost": 4
   },
   {
     "raid_type": "BDN",
@@ -1537,7 +1537,7 @@ module.exports = [
     "category": "Weapon",
     "class": "Warrior",
     "item_name": "BDN Weapon (Warrior@Sword)",
-    "stamp_cost": 5
+    "stamp_cost": 4
   },
   {
     "raid_type": "BDN",
@@ -1545,7 +1545,7 @@ module.exports = [
     "category": "Weapon",
     "class": "Warrior",
     "item_name": "BDN Weapon (Warrior@Gauntlet)",
-    "stamp_cost": 5
+    "stamp_cost": 4
   },
   {
     "raid_type": "BDN",
@@ -1553,7 +1553,7 @@ module.exports = [
     "category": "Armor",
     "class": "Cleric",
     "item_name": "BDN Armor (Cleric@Galero)",
-    "stamp_cost": 3
+    "stamp_cost": 2
   },
   {
     "raid_type": "BDN",
@@ -1561,7 +1561,7 @@ module.exports = [
     "category": "Armor",
     "class": "Cleric",
     "item_name": "BDN Armor (Cleric@Armor)",
-    "stamp_cost": 3
+    "stamp_cost": 2
   },
   {
     "raid_type": "BDN",
@@ -1569,7 +1569,7 @@ module.exports = [
     "category": "Armor",
     "class": "Cleric",
     "item_name": "BDN Armor (Cleric@Trousers)",
-    "stamp_cost": 3
+    "stamp_cost": 2
   },
   {
     "raid_type": "BDN",
@@ -1577,7 +1577,7 @@ module.exports = [
     "category": "Armor",
     "class": "Cleric",
     "item_name": "BDN Armor (Cleric@Cuff)",
-    "stamp_cost": 3
+    "stamp_cost": 2
   },
   {
     "raid_type": "BDN",
@@ -1585,7 +1585,7 @@ module.exports = [
     "category": "Armor",
     "class": "Cleric",
     "item_name": "BDN Armor (Cleric@Shoes)",
-    "stamp_cost": 3
+    "stamp_cost": 2
   },
   {
     "raid_type": "BDN",
@@ -1593,7 +1593,7 @@ module.exports = [
     "category": "Weapon",
     "class": "Cleric",
     "item_name": "BDN Weapon (Cleric@Flail)",
-    "stamp_cost": 5
+    "stamp_cost": 4
   },
   {
     "raid_type": "BDN",
@@ -1601,7 +1601,7 @@ module.exports = [
     "category": "Weapon",
     "class": "Cleric",
     "item_name": "BDN Weapon (Cleric@Mace)",
-    "stamp_cost": 5
+    "stamp_cost": 4
   },
   {
     "raid_type": "BDN",
@@ -1609,7 +1609,7 @@ module.exports = [
     "category": "Weapon",
     "class": "Cleric",
     "item_name": "BDN Weapon (Cleric@Wand)",
-    "stamp_cost": 5
+    "stamp_cost": 4
   },
   {
     "raid_type": "BDN",
@@ -1617,7 +1617,7 @@ module.exports = [
     "category": "Weapon",
     "class": "Cleric",
     "item_name": "BDN Weapon (Cleric@Shield)",
-    "stamp_cost": 5
+    "stamp_cost": 4
   },
   {
     "raid_type": "BDN",
@@ -1625,7 +1625,7 @@ module.exports = [
     "category": "Armor",
     "class": "Arcer",
     "item_name": "BDN Armor (Arcer@Headband)",
-    "stamp_cost": 3
+    "stamp_cost": 2
   },
   {
     "raid_type": "BDN",
@@ -1633,7 +1633,7 @@ module.exports = [
     "category": "Armor",
     "class": "Arcer",
     "item_name": "BDN Armor (Arcer@OnePiece)",
-    "stamp_cost": 3
+    "stamp_cost": 2
   },
   {
     "raid_type": "BDN",
@@ -1641,7 +1641,7 @@ module.exports = [
     "category": "Armor",
     "class": "Arcer",
     "item_name": "BDN Armor (Arcer@Leggings)",
-    "stamp_cost": 3
+    "stamp_cost": 2
   },
   {
     "raid_type": "BDN",
@@ -1649,7 +1649,7 @@ module.exports = [
     "category": "Armor",
     "class": "Arcer",
     "item_name": "BDN Armor (Arcer@Mittens)",
-    "stamp_cost": 3
+    "stamp_cost": 2
   },
   {
     "raid_type": "BDN",
@@ -1657,7 +1657,7 @@ module.exports = [
     "category": "Armor",
     "class": "Arcer",
     "item_name": "BDN Armor (Arcer@Booties)",
-    "stamp_cost": 3
+    "stamp_cost": 2
   },
   {
     "raid_type": "BDN",
@@ -1665,7 +1665,7 @@ module.exports = [
     "category": "Weapon",
     "class": "Arcer",
     "item_name": "BDN Weapon (Arcer@Shortbow)",
-    "stamp_cost": 5
+    "stamp_cost": 4
   },
   {
     "raid_type": "BDN",
@@ -1673,7 +1673,7 @@ module.exports = [
     "category": "Weapon",
     "class": "Arcer",
     "item_name": "BDN Weapon (Arcer@Longbow)",
-    "stamp_cost": 5
+    "stamp_cost": 4
   },
   {
     "raid_type": "BDN",
@@ -1681,7 +1681,7 @@ module.exports = [
     "category": "Weapon",
     "class": "Arcer",
     "item_name": "BDN Weapon (Arcer@Crossbow)",
-    "stamp_cost": 5
+    "stamp_cost": 4
   },
   {
     "raid_type": "BDN",
@@ -1689,7 +1689,7 @@ module.exports = [
     "category": "Weapon",
     "class": "Arcer",
     "item_name": "BDN Weapon (Arcer@Quiver)",
-    "stamp_cost": 5
+    "stamp_cost": 4
   },
   {
     "raid_type": "BDN",
@@ -1697,7 +1697,7 @@ module.exports = [
     "category": "Armor",
     "class": "Sorceress",
     "item_name": "BDN Armor (Sorceress@Tiara)",
-    "stamp_cost": 3
+    "stamp_cost": 2
   },
   {
     "raid_type": "BDN",
@@ -1705,7 +1705,7 @@ module.exports = [
     "category": "Armor",
     "class": "Sorceress",
     "item_name": "BDN Armor (Sorceress@Robe)",
-    "stamp_cost": 3
+    "stamp_cost": 2
   },
   {
     "raid_type": "BDN",
@@ -1713,7 +1713,7 @@ module.exports = [
     "category": "Armor",
     "class": "Sorceress",
     "item_name": "BDN Armor (Sorceress@Tights)",
-    "stamp_cost": 3
+    "stamp_cost": 2
   },
   {
     "raid_type": "BDN",
@@ -1721,7 +1721,7 @@ module.exports = [
     "category": "Armor",
     "class": "Sorceress",
     "item_name": "BDN Armor (Sorceress@Muffs)",
-    "stamp_cost": 3
+    "stamp_cost": 2
   },
   {
     "raid_type": "BDN",
@@ -1729,7 +1729,7 @@ module.exports = [
     "category": "Armor",
     "class": "Sorceress",
     "item_name": "BDN Armor (Sorceress@Heels)",
-    "stamp_cost": 3
+    "stamp_cost": 2
   },
   {
     "raid_type": "BDN",
@@ -1737,7 +1737,7 @@ module.exports = [
     "category": "Weapon",
     "class": "Sorceress",
     "item_name": "BDN Weapon (Sorceress@Spellbook)",
-    "stamp_cost": 5
+    "stamp_cost": 4
   },
   {
     "raid_type": "BDN",
@@ -1745,7 +1745,7 @@ module.exports = [
     "category": "Weapon",
     "class": "Sorceress",
     "item_name": "BDN Weapon (Sorceress@CrystalBall)",
-    "stamp_cost": 5
+    "stamp_cost": 4
   },
   {
     "raid_type": "BDN",
@@ -1753,7 +1753,7 @@ module.exports = [
     "category": "Weapon",
     "class": "Sorceress",
     "item_name": "BDN Weapon (Sorceress@VoodooDoll)",
-    "stamp_cost": 5
+    "stamp_cost": 4
   },
   {
     "raid_type": "BDN",
@@ -1761,7 +1761,7 @@ module.exports = [
     "category": "Weapon",
     "class": "Sorceress",
     "item_name": "BDN Weapon (Sorceress@Staff)",
-    "stamp_cost": 5
+    "stamp_cost": 4
   },
   {
     "raid_type": "BDN",
@@ -1769,7 +1769,7 @@ module.exports = [
     "category": "Armor",
     "class": "Academic",
     "item_name": "BDN Armor (Academic@Beret)",
-    "stamp_cost": 3
+    "stamp_cost": 2
   },
   {
     "raid_type": "BDN",
@@ -1777,7 +1777,7 @@ module.exports = [
     "category": "Armor",
     "class": "Academic",
     "item_name": "BDN Armor (Academic@Tunic)",
-    "stamp_cost": 3
+    "stamp_cost": 2
   },
   {
     "raid_type": "BDN",
@@ -1785,7 +1785,7 @@ module.exports = [
     "category": "Armor",
     "class": "Academic",
     "item_name": "BDN Armor (Academic@Slacks)",
-    "stamp_cost": 3
+    "stamp_cost": 2
   },
   {
     "raid_type": "BDN",
@@ -1793,7 +1793,7 @@ module.exports = [
     "category": "Armor",
     "class": "Academic",
     "item_name": "BDN Armor (Academic@Cloack)",
-    "stamp_cost": 3
+    "stamp_cost": 2
   },
   {
     "raid_type": "BDN",
@@ -1801,7 +1801,7 @@ module.exports = [
     "category": "Armor",
     "class": "Academic",
     "item_name": "BDN Armor (Academic@Shoes)",
-    "stamp_cost": 3
+    "stamp_cost": 2
   },
   {
     "raid_type": "BDN",
@@ -1809,7 +1809,7 @@ module.exports = [
     "category": "Weapon",
     "class": "Academic",
     "item_name": "BDN Weapon (Academic@Cannon)",
-    "stamp_cost": 5
+    "stamp_cost": 4
   },
   {
     "raid_type": "BDN",
@@ -1817,7 +1817,7 @@ module.exports = [
     "category": "Weapon",
     "class": "Academic",
     "item_name": "BDN Weapon (Academic@Kabala)",
-    "stamp_cost": 5
+    "stamp_cost": 4
   },
   {
     "raid_type": "BDN",
@@ -1825,7 +1825,7 @@ module.exports = [
     "category": "Weapon",
     "class": "Academic",
     "item_name": "BDN Weapon (Academic@Loop)",
-    "stamp_cost": 5
+    "stamp_cost": 4
   },
   {
     "raid_type": "BDN",
@@ -1833,7 +1833,7 @@ module.exports = [
     "category": "Armor",
     "class": "Kali",
     "item_name": "BDN Armor (Kali@Orni)",
-    "stamp_cost": 3
+    "stamp_cost": 2
   },
   {
     "raid_type": "BDN",
@@ -1841,7 +1841,7 @@ module.exports = [
     "category": "Armor",
     "class": "Kali",
     "item_name": "BDN Armor (Kali@Chori)",
-    "stamp_cost": 3
+    "stamp_cost": 2
   },
   {
     "raid_type": "BDN",
@@ -1849,7 +1849,7 @@ module.exports = [
     "category": "Armor",
     "class": "Kali",
     "item_name": "BDN Armor (Kali@Salwar)",
-    "stamp_cost": 3
+    "stamp_cost": 2
   },
   {
     "raid_type": "BDN",
@@ -1857,7 +1857,7 @@ module.exports = [
     "category": "Armor",
     "class": "Kali",
     "item_name": "BDN Armor (Kali@Rakki)",
-    "stamp_cost": 3
+    "stamp_cost": 2
   },
   {
     "raid_type": "BDN",
@@ -1865,7 +1865,7 @@ module.exports = [
     "category": "Armor",
     "class": "Kali",
     "item_name": "BDN Armor (Kali@Jutti)",
-    "stamp_cost": 3
+    "stamp_cost": 2
   },
   {
     "raid_type": "BDN",
@@ -1873,7 +1873,7 @@ module.exports = [
     "category": "Weapon",
     "class": "Kali",
     "item_name": "BDN Weapon (Kali@Fan)",
-    "stamp_cost": 5
+    "stamp_cost": 4
   },
   {
     "raid_type": "BDN",
@@ -1881,7 +1881,7 @@ module.exports = [
     "category": "Weapon",
     "class": "Kali",
     "item_name": "BDN Weapon (Kali@Chakram)",
-    "stamp_cost": 5
+    "stamp_cost": 4
   },
   {
     "raid_type": "BDN",
@@ -1889,7 +1889,7 @@ module.exports = [
     "category": "Weapon",
     "class": "Kali",
     "item_name": "BDN Weapon (Kali@Charm)",
-    "stamp_cost": 5
+    "stamp_cost": 4
   },
   {
     "raid_type": "BDN",
@@ -1897,7 +1897,7 @@ module.exports = [
     "category": "Armor",
     "class": "Assassin",
     "item_name": "BDN Armor (Assassin@Mask)",
-    "stamp_cost": 3
+    "stamp_cost": 2
   },
   {
     "raid_type": "BDN",
@@ -1905,7 +1905,7 @@ module.exports = [
     "category": "Armor",
     "class": "Assassin",
     "item_name": "BDN Armor (Assassin@Vest)",
-    "stamp_cost": 3
+    "stamp_cost": 2
   },
   {
     "raid_type": "BDN",
@@ -1913,7 +1913,7 @@ module.exports = [
     "category": "Armor",
     "class": "Assassin",
     "item_name": "BDN Armor (Assassin@Greave)",
-    "stamp_cost": 3
+    "stamp_cost": 2
   },
   {
     "raid_type": "BDN",
@@ -1921,7 +1921,7 @@ module.exports = [
     "category": "Armor",
     "class": "Assassin",
     "item_name": "BDN Armor (Assassin@Grip)",
-    "stamp_cost": 3
+    "stamp_cost": 2
   },
   {
     "raid_type": "BDN",
@@ -1929,7 +1929,7 @@ module.exports = [
     "category": "Armor",
     "class": "Assassin",
     "item_name": "BDN Armor (Assassin@Walker)",
-    "stamp_cost": 3
+    "stamp_cost": 2
   },
   {
     "raid_type": "BDN",
@@ -1937,7 +1937,7 @@ module.exports = [
     "category": "Weapon",
     "class": "Assassin",
     "item_name": "BDN Weapon (Assassin@Scimitar)",
-    "stamp_cost": 5
+    "stamp_cost": 4
   },
   {
     "raid_type": "BDN",
@@ -1945,7 +1945,7 @@ module.exports = [
     "category": "Weapon",
     "class": "Assassin",
     "item_name": "BDN Weapon (Assassin@Dagger)",
-    "stamp_cost": 5
+    "stamp_cost": 4
   },
   {
     "raid_type": "BDN",
@@ -1953,7 +1953,7 @@ module.exports = [
     "category": "Weapon",
     "class": "Assassin",
     "item_name": "BDN Weapon (Assassin@Crook)",
-    "stamp_cost": 5
+    "stamp_cost": 4
   },
   {
     "raid_type": "BDN",
@@ -1962,14 +1962,6 @@ module.exports = [
     "class": null,
     "item_name": "BDN Fragment",
     "stamp_cost": 1
-  },
-  {
-    "raid_type": "BDN",
-    "tier": "Classic",
-    "category": "Material",
-    "class": null,
-    "item_name": "BDN Smelted Rune",
-    "stamp_cost": 4
   },
   {
     "raid_type": "BDN",

@@ -218,85 +218,84 @@ DDN HC
 
 BDN CLASIC
 
--  BDN Unique Accessory (Earrings@STR AGI) X 24
--  BDN Unique Accessory (Earrings@INT AGI) X 24
--  BDN Unique Accessory (Earrings@INT VIT) X 24
--  BDN Unique Accessory (Neckle@STR AGI) X 24
--  BDN Unique Accessory (Neckle@INT AGI) X 24
--  BDN Unique Accessory (Neckle@INT VIT) X 24
--  BDN Unique Accessory (Ring@ATP) X 24
--  BDN Unique Accessory (Ring@MTP) X 24
--  BDN Unique Accessory (Ring@MIX) X 24
+-  BDN Unique Accessory (Earrings@STR AGI) X 22
+-  BDN Unique Accessory (Earrings@INT AGI) X 22
+-  BDN Unique Accessory (Earrings@INT VIT) X 22
+-  BDN Unique Accessory (Neckle@STR AGI) X 22
+-  BDN Unique Accessory (Neckle@INT AGI) X 22
+-  BDN Unique Accessory (Neckle@INT VIT) X 22
+-  BDN Unique Accessory (Ring@ATP) X 22
+-  BDN Unique Accessory (Ring@MTP) X 22
+-  BDN Unique Accessory (Ring@MIX) X 22
 ----------------------------------------------------
--  BDN Armor (Warrior@Head) x 3
--  BDN Armor (Warrior@Shirt) x 3
--  BDN Armor (Warrior@Pants) x 3
--  BDN Armor (Warrior@Gloves) x 3
--  BDN Armor (Warrior@Boots) x 3
--  BDN Weapon (Warrior@Axe) x 5
--  BDN Weapon (Warrior@Hammer) x 5
--  BDN Weapon (Warrior@Sword) x 5
--  BDN Weapon (Warrior@Gauntlet) x 5
+-  BDN Armor (Warrior@Head) x 2
+-  BDN Armor (Warrior@Shirt) x 2
+-  BDN Armor (Warrior@Pants) x 2
+-  BDN Armor (Warrior@Gloves) x 2
+-  BDN Armor (Warrior@Boots) x 2
+-  BDN Weapon (Warrior@Axe) x 4
+-  BDN Weapon (Warrior@Hammer) x 4
+-  BDN Weapon (Warrior@Sword) x 4
+-  BDN Weapon (Warrior@Gauntlet) x 4
 ----------------------------------------------------
--  BDN Armor (Cleric@Galero) x 3
--  BDN Armor (Cleric@Armor) x 3
--  BDN Armor (Cleric@Trousers) x 3
--  BDN Armor (Cleric@Cuff) x 3
--  BDN Armor (Cleric@Shoes) x 3
--  BDN Weapon (Cleric@Flail) x 5
--  BDN Weapon (Cleric@Mace) x 5
--  BDN Weapon (Cleric@Wand) x 5
--  BDN Weapon (Cleric@Shield) x 5
+-  BDN Armor (Cleric@Galero) x 2
+-  BDN Armor (Cleric@Armor) x 2
+-  BDN Armor (Cleric@Trousers) x 2
+-  BDN Armor (Cleric@Cuff) x 2
+-  BDN Armor (Cleric@Shoes) x 2
+-  BDN Weapon (Cleric@Flail) x 4
+-  BDN Weapon (Cleric@Mace) x 4
+-  BDN Weapon (Cleric@Wand) x 4
+-  BDN Weapon (Cleric@Shield) x 4
 ----------------------------------------------------
--  BDN Armor (Arcer@Headband) x 3
--  BDN Armor (Arcer@OnePiece) x 3
--  BDN Armor (Arcer@Leggings) x 3
--  BDN Armor (Arcer@Mittens) x 3
--  BDN Armor (Arcer@Booties) x 3
--  BDN Weapon (Arcer@Shortbow) x 5
--  BDN Weapon (Arcer@Longbow) x 5
--  BDN Weapon (Arcer@Crossbow) x 5
--  BDN Weapon (Arcer@Quiver) x 5
+-  BDN Armor (Arcer@Headband) x 2
+-  BDN Armor (Arcer@OnePiece) x 2
+-  BDN Armor (Arcer@Leggings) x 2
+-  BDN Armor (Arcer@Mittens) x 2
+-  BDN Armor (Arcer@Booties) x 2
+-  BDN Weapon (Arcer@Shortbow) x 4
+-  BDN Weapon (Arcer@Longbow) x 4
+-  BDN Weapon (Arcer@Crossbow) x 4
+-  BDN Weapon (Arcer@Quiver) x 4
 ----------------------------------------------------
--  BDN Armor (Sorceress@Tiara) x 3
--  BDN Armor (Sorceress@Robe) x 3
--  BDN Armor (Sorceress@Tights) x 3
--  BDN Armor (Sorceress@Muffs) x 3
--  BDN Armor (Sorceress@Heels) x 3
--  BDN Weapon (Sorceress@Spellbook) x 5
--  BDN Weapon (Sorceress@CrystalBall) x 5
--  BDN Weapon (Sorceress@VoodooDoll) x 5
--  BDN Weapon (Sorceress@Staff) x 5
+-  BDN Armor (Sorceress@Tiara) x 2
+-  BDN Armor (Sorceress@Robe) x 2
+-  BDN Armor (Sorceress@Tights) x 2
+-  BDN Armor (Sorceress@Muffs) x 2
+-  BDN Armor (Sorceress@Heels) x 2
+-  BDN Weapon (Sorceress@Spellbook) x 4
+-  BDN Weapon (Sorceress@CrystalBall) x 4
+-  BDN Weapon (Sorceress@VoodooDoll) x 4
+-  BDN Weapon (Sorceress@Staff) x 4
 ----------------------------------------------------
--  BDN Armor (Academic@Beret) x 3
--  BDN Armor (Academic@Tunic) x 3
--  BDN Armor (Academic@Slacks) x 3
--  BDN Armor (Academic@Cloack) x 3
--  BDN Armor (Academic@Shoes) x 3
--  BDN Weapon (Academic@Cannon) x 5
--  BDN Weapon (Academic@Kabala) x 5
--  BDN Weapon (Academic@Loop) x 5
+-  BDN Armor (Academic@Beret) x 2
+-  BDN Armor (Academic@Tunic) x 2
+-  BDN Armor (Academic@Slacks) x 2
+-  BDN Armor (Academic@Cloack) x 2
+-  BDN Armor (Academic@Shoes) x 2
+-  BDN Weapon (Academic@Cannon) x 4
+-  BDN Weapon (Academic@Kabala) x 4
+-  BDN Weapon (Academic@Loop) x 4
 ----------------------------------------------------
--  BDN Armor (Kali@Orni) x 3
--  BDN Armor (Kali@Chori) x 3
--  BDN Armor (Kali@Salwar) x 3
--  BDN Armor (Kali@Rakki) x 3
--  BDN Armor (Kali@Jutti) x 3
--  BDN Weapon (Kali@Fan) x 5
--  BDN Weapon (Kali@Chakram) x 5
--  BDN Weapon (Kali@Charm) x 5
+-  BDN Armor (Kali@Orni) x 2
+-  BDN Armor (Kali@Chori) x 2
+-  BDN Armor (Kali@Salwar) x 2
+-  BDN Armor (Kali@Rakki) x 2
+-  BDN Armor (Kali@Jutti) x 2
+-  BDN Weapon (Kali@Fan) x 4
+-  BDN Weapon (Kali@Chakram) x 4
+-  BDN Weapon (Kali@Charm) x 4
 ----------------------------------------------------
--  BDN Armor (Assassin@Mask) x 3
--  BDN Armor (Assassin@Vest) x 3
--  BDN Armor (Assassin@Greave) x 3
--  BDN Armor (Assassin@Grip) x 3
--  BDN Armor (Assassin@Walker) x 3
--  BDN Weapon (Assassin@Scimitar) x 5
--  BDN Weapon (Assassin@Dagger) x 5
--  BDN Weapon (Assassin@Crook) x 5
+-  BDN Armor (Assassin@Mask) x 2
+-  BDN Armor (Assassin@Vest) x 2
+-  BDN Armor (Assassin@Greave) x 2
+-  BDN Armor (Assassin@Grip) x 2
+-  BDN Armor (Assassin@Walker) x 2
+-  BDN Weapon (Assassin@Scimitar) x 4
+-  BDN Weapon (Assassin@Dagger) x 4
+-  BDN Weapon (Assassin@Crook) x 4
 ----------------------------------------------------
 -  BDN Fragment x 1
--  BDN Smelted Rune x 4
 -  BDN Legend Darkness Triangular x 8
 -  BDN Unique Darkness Triangular x 4
 -  BDN Legend Hrror Circular x 8

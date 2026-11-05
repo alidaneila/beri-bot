@@ -1984,7 +1984,7 @@ module.exports = [
     "tier": "Classic",
     "category": "Material",
     "class": null,
-    "item_name": "BDN Legend Hrror Circular",
+    "item_name": "BDN Legend Horror Circular",
     "stamp_cost": 8
   },
   {

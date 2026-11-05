@@ -298,7 +298,7 @@ BDN CLASIC
 -  BDN Fragment x 1
 -  BDN Legend Darkness Triangular x 8
 -  BDN Unique Darkness Triangular x 4
--  BDN Legend Hrror Circular x 8
+-  BDN Legend Horror Circular x 8
 -  BDN Unique Horror Circular x 4
 ----------------------------------------------------
 

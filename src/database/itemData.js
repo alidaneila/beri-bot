@@ -1968,6 +1968,14 @@ module.exports = [
     "tier": "Classic",
     "category": "Material",
     "class": null,
+    "item_name": "BDN Smelted Rune",
+    "stamp_cost": 4
+  },
+  {
+    "raid_type": "BDN",
+    "tier": "Classic",
+    "category": "Material",
+    "class": null,
     "item_name": "BDN Legend Darkness Triangular",
     "stamp_cost": 8
   },
@@ -1990,6 +1998,134 @@ module.exports = [
   {
     "raid_type": "BDN",
     "tier": "Classic",
+    "category": "Material",
+    "class": null,
+    "item_name": "BDN Unique Horror Circular",
+    "stamp_cost": 4
+  },
+  {
+    "raid_type": "BDN",
+    "tier": "HC",
+    "category": "Accessory",
+    "class": null,
+    "item_name": "BDN Legend Accessory (Earrings@STR AGI)",
+    "stamp_cost": 37
+  },
+  {
+    "raid_type": "BDN",
+    "tier": "HC",
+    "category": "Accessory",
+    "class": null,
+    "item_name": "BDN Legend Accessory (Earrings@INT AGI)",
+    "stamp_cost": 37
+  },
+  {
+    "raid_type": "BDN",
+    "tier": "HC",
+    "category": "Accessory",
+    "class": null,
+    "item_name": "BDN Legend Accessory (Earrings@INT VIT)",
+    "stamp_cost": 37
+  },
+  {
+    "raid_type": "BDN",
+    "tier": "HC",
+    "category": "Accessory",
+    "class": null,
+    "item_name": "BDN Legend Accessory (Neckle@STR AGI)",
+    "stamp_cost": 37
+  },
+  {
+    "raid_type": "BDN",
+    "tier": "HC",
+    "category": "Accessory",
+    "class": null,
+    "item_name": "BDN Legend Accessory (Neckle@INT AGI)",
+    "stamp_cost": 37
+  },
+  {
+    "raid_type": "BDN",
+    "tier": "HC",
+    "category": "Accessory",
+    "class": null,
+    "item_name": "BDN Legend Accessory (Neckle@INT VIT)",
+    "stamp_cost": 37
+  },
+  {
+    "raid_type": "BDN",
+    "tier": "HC",
+    "category": "Accessory",
+    "class": null,
+    "item_name": "BDN Legend Accessory (Ring@ATP)",
+    "stamp_cost": 37
+  },
+  {
+    "raid_type": "BDN",
+    "tier": "HC",
+    "category": "Accessory",
+    "class": null,
+    "item_name": "BDN Legend Accessory (Ring@MTP)",
+    "stamp_cost": 37
+  },
+  {
+    "raid_type": "BDN",
+    "tier": "HC",
+    "category": "Accessory",
+    "class": null,
+    "item_name": "BDN Legend Accessory (Ring@MIX)",
+    "stamp_cost": 37
+  },
+  {
+    "raid_type": "BDN",
+    "tier": "HC",
+    "category": "Material",
+    "class": null,
+    "item_name": "BDN Fragment",
+    "stamp_cost": 1
+  },
+  {
+    "raid_type": "BDN",
+    "tier": "HC",
+    "category": "Material",
+    "class": null,
+    "item_name": "BDN Smelted Rune",
+    "stamp_cost": 4
+  },
+  {
+    "raid_type": "BDN",
+    "tier": "HC",
+    "category": "Material",
+    "class": null,
+    "item_name": "BDN Research Records",
+    "stamp_cost": 3
+  },
+  {
+    "raid_type": "BDN",
+    "tier": "HC",
+    "category": "Material",
+    "class": null,
+    "item_name": "BDN Legend Darkness Triangular",
+    "stamp_cost": 8
+  },
+  {
+    "raid_type": "BDN",
+    "tier": "HC",
+    "category": "Material",
+    "class": null,
+    "item_name": "BDN Unique Darkness Triangular",
+    "stamp_cost": 4
+  },
+  {
+    "raid_type": "BDN",
+    "tier": "HC",
+    "category": "Material",
+    "class": null,
+    "item_name": "BDN Legend Horror Circular",
+    "stamp_cost": 8
+  },
+  {
+    "raid_type": "BDN",
+    "tier": "HC",
     "category": "Material",
     "class": null,
     "item_name": "BDN Unique Horror Circular",

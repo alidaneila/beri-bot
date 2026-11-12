@@ -296,9 +296,30 @@ BDN CLASIC
 -  BDN Weapon (Assassin@Crook) x 4
 ----------------------------------------------------
 -  BDN Fragment x 1
+-  BDN Smelted Rune x 4
 -  BDN Legend Darkness Triangular x 8
 -  BDN Unique Darkness Triangular x 4
 -  BDN Legend Horror Circular x 8
 -  BDN Unique Horror Circular x 4
 ----------------------------------------------------
 
+BDN HC
+
+-  BDN Legend Accessory (Earrings@STR AGI) X 37
+-  BDN Legend Accessory (Earrings@INT AGI) X 37
+-  BDN Legend Accessory (Earrings@INT VIT) X 37
+-  BDN Legend Accessory (Neckle@STR AGI) X 37
+-  BDN Legend Accessory (Neckle@INT AGI) X 37
+-  BDN Legend Accessory (Neckle@INT VIT) X 37
+-  BDN Legend Accessory (Ring@ATP) X 37
+-  BDN Legend Accessory (Ring@MTP) X 37
+-  BDN Legend Accessory (Ring@MIX) X 37
+----------------------------------------------------
+-  BDN Fragment x 1
+-  BDN Smelted Rune x 4
+-  BDN Research Records x 3
+-  BDN Legend Darkness Triangular x 8
+-  BDN Unique Darkness Triangular x 4
+-  BDN Legend Horror Circular x 8
+-  BDN Unique Horror Circular x 4
+----------------------------------------------------

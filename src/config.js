@@ -28,7 +28,7 @@ module.exports = {
   dbPath: process.env.DB_PATH || './data/bot.sqlite',
 
   // Aturan bisnis yang bisa diubah tanpa nyentuh logika
-  stampUnitPrice: 5,       // harga 1 sealstamp dalam gold
+  stampUnitPrice: 7,       // harga 1 sealstamp dalam gold
   transferFeeRate: 0.003,  // fee transfer 0.3%
 
   // Cap TOTAL member party — begitu member aktif nyampe segini, party dianggap penuh
